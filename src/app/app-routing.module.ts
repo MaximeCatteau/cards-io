@@ -47,9 +47,6 @@ import {ChartBoxes3Component} from './DemoPages/Widgets/chart-boxes3/chart-boxes
 import {ControlsComponent} from './DemoPages/Forms/Elements/controls/controls.component';
 import {LayoutComponent} from './DemoPages/Forms/Elements/layout/layout.component';
 
-// Charts
-
-import {ChartjsComponent} from './DemoPages/Charts/chartjs/chartjs.component';
 import { CardsComponent } from './DemoPages/Cards/cards.component';
 import { ShopComponent } from './DemoPages/Shop/shop.component';
 import { TradeComponent } from './DemoPages/Trades/trade.component';
