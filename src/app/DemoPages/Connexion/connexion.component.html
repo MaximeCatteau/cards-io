@@ -1,0 +1,33 @@
+<div class="col-md-12">
+    <div class="main-card mb-3 card">
+      <div class="card-body"><h5 class="card-title">Connexion</h5>
+        <form [formGroup]="signInForm">
+          <div class="position-relative form-group">
+              <label for="pseudoConnexion">Pseudo</label>
+              <input name="pseudoConnexion" id="pseudoConnexion" placeholder="Votre pseudo..." type="text" class="form-control" formControlName="pseudoConnexion">
+          </div>
+          <div class="position-relative form-group">
+              <label for="passwordConnexion">Mot de passe</label>
+              <input name="passwordConnexion" id="passwordConnexion" type="password" class="form-control" formControlName="passwordConnexion"></div>    
+          <button class="mt-1 btn btn-primary" (click)="connect()">Valider</button>
+        </form>
+      </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="main-card mb-3 card">
+      <div class="card-body"><h5 class="card-title">Inscription</h5>
+        <form [formGroup]="signUpForm">
+          <div class="position-relative form-group">
+              <label for="pseudoInscription">Pseudo</label>
+              <input name="pseudoInscription" id="pseudoInscription" placeholder="Votre pseudo..." type="text" class="form-control" formControlName="pseudoInscription"/>
+          </div>
+          <div class="position-relative form-group">
+              <label for="passwordInscription">Mot de passe</label>
+              <input name="passwordInscription" id="passwordInscription" type="password" class="form-control" formControlName="passwordInscription"></div>
+          
+          <button class="mt-1 btn btn-primary" (click)="signUp()">Valider</button>
+        </form>
+      </div>
+    </div>
+</div>   

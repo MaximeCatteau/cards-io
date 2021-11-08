@@ -1,0 +1,28 @@
+<div class="d-flex">
+  <div class="header-btn-lg pr-0">
+    <div class="widget-content p-0">
+      <div class="widget-content-wrapper">
+        <div class="widget-content-left">
+          <div class="btn-group row" ngbDropdown placement="bottom-right">
+            <button type="button" class="col-6 btn btn-link p-0 mr-2" ngbDropdownToggle>
+              <span>
+                <div *ngIf="username">
+                  {{ username }}
+                </div>
+              </span>
+            </button>
+            <div ngbDropdownMenu>
+              <button class="dropdown-item">Mon profil</button>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item" (click)="logout()">Deconnexion</button>
+            </div>
+            <div class="col-6" *ngIf="userCash">
+              {{ userCash }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

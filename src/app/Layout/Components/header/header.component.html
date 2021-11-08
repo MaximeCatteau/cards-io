@@ -1,0 +1,16 @@
+<div [class]="'app-header header-shadow ' + (config$ | async).headerTheme" *ngIf="user">
+  <div class="logo-src"></div>
+  <div class="app-header__content">
+    <div class="app-header-right">
+      <app-user-box [username]="user" [userCash]="userCash"></app-user-box>
+    </div>
+  </div>
+</div>
+<div [class]="'app-header header-shadow ' + (config$ | async).headerTheme" *ngIf="!user">
+  <div class="logo-src"></div>
+  <div class="app-header__content">
+    <div class="app-header-right">
+      <div class="user-button">Connexion/Inscription</div>
+    </div>
+  </div>
+</div>

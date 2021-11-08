@@ -1,0 +1,28 @@
+<div class="col-md-12">
+  <div class="main-card mb-3 card">
+    <div class="card-body"><h5 class="card-title">Code de récompense</h5>
+      <form [formGroup]="codeForm">
+        <div class="position-relative form-group">
+            <label for="code">Code</label>
+            <input name="code" id="code" placeholder="Entrez votre code..." type="text" class="form-control" formControlName="codeValue">
+        </div> 
+        <button class="mt-1 btn btn-success" (click)="open(content)">Valider</button>
+      </form>
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">{{ cardWin?.label }}</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body card card-body">
+          <img src="{{ cardWin?.imageUrl }}">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" (click)="c('Close click')">Cool !</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
