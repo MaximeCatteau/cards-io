@@ -5,19 +5,14 @@ function requireHTTPS(req, res, next) {
     }
     next();
 }
-
-console.log("### BEFORE EXPRESS");
 const express = require('express');
-console.log("### APP");
 const app = express();
-console.log("### FIRST USE");
 app.use(requireHTTPS);
-console.log("### SECOND USE");
-app.use(express.static("./dist/cards-io/"));
-console.log("### GET");
+app.use(express.static('./dist/architectui-angular-free'));
+
 app.get('/*', function(req, res) {
-    res.sendFile('index.html', {root: './dist/cards-io/'}
+    res.sendFile('index.html', {root: 'dist/architectui-angular-free/'}
   );
 });
-console.log("### LISTEN");
+
 app.listen(process.env.PORT || 8080);
