@@ -32,9 +32,9 @@ export class ConnexionComponent implements OnInit {
   }
 
   public connect() {
-    this.api.userService.signIn(this.signInForm.value.pseudoConnexion, this.signInForm.value.passwordConnexion).subscribe((user: Player) => {
+    this.api.userService.signIn(this.signInForm.value.pseudoConnexion, this.signInForm.value.passwordConnexion).subscribe((user: any) => {
       localStorage.setItem('user', user.username);
-      localStorage.setItem('userCash', user.cashCard);
+      localStorage.setItem('userCash', "" + user.cashCard);
       
       window.location.reload();
       this.router.navigate(['cards']);
@@ -42,9 +42,9 @@ export class ConnexionComponent implements OnInit {
   }
 
   public signUp() {
-    this.api.userService.signUp(this.signUpForm.value.pseudoInscription, this.signUpForm.value.passwordInscription).subscribe((user: Player) => {
+    this.api.userService.signUp(this.signUpForm.value.pseudoInscription, this.signUpForm.value.passwordInscription).subscribe((user: any) => {
       localStorage.setItem('user', user.username);
-      localStorage.setItem('userCash', user.cashCard);
+      localStorage.setItem('userCash', "" + user.cashCard);
 
       window.location.reload();
       this.router.navigate(['cards']);

@@ -36,8 +36,6 @@ import {animate, query, style, transition, trigger} from '@angular/animations';
 
 export class BaseLayoutComponent {
 
-  userConnected = null;
-
   @select('config') public config$: Observable<any>;
 
   constructor(public globals: ThemeOptions, public configActions: ConfigActions) {
@@ -45,13 +43,6 @@ export class BaseLayoutComponent {
 
   toggleSidebarMobile() {
     this.globals.toggleSidebarMobile = !this.globals.toggleSidebarMobile;
-  }
-
-  connectUser(user) {
-    this.userConnected = user;
-    console.log("### IN BASE LAYOUT");
-    console.log(this.userConnected);
-    
   }
 }
 

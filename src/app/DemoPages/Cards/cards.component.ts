@@ -9,7 +9,7 @@ import { ApiService } from 'src/app/Services/api.service';
 })
 export class CardsComponent implements OnInit {
 
-  cards;
+  cards = <any>[];
   isLoading = true;
   username = null;
 
@@ -17,7 +17,7 @@ export class CardsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.api.cards.getAllPlayerCards(localStorage.user).subscribe((response) => {
+    this.api.cards.getAllPlayerCards(localStorage['user']).subscribe((response) => {
       if (response) {
         this.cards = response;
         this.isLoading = false;

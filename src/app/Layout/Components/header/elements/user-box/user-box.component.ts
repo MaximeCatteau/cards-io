@@ -8,8 +8,8 @@ import {ThemeOptions} from '../../../../../theme-options';
 })
 export class UserBoxComponent implements OnInit {
 
-  @Input() username;
-  @Input() userCash;
+  @Input() username: any;
+  @Input() userCash: any;
 
   constructor(public globals: ThemeOptions, public router: Router) {
   }

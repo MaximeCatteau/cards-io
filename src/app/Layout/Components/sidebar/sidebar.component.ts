@@ -1,6 +1,5 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, NgIterable, OnInit} from '@angular/core';
 import {ThemeOptions} from '../../../theme-options';
-import {select} from '@angular-redux/store';
 import {Observable} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import { ApiService } from 'src/app/Services/api.service';
@@ -11,17 +10,15 @@ import { ApiService } from 'src/app/Services/api.service';
 })
 export class SidebarComponent implements OnInit {
   public extraParameter: any;
-  public user = localStorage.user;
-  public collections;
+  public user = localStorage['user'];
+  public collections: any | undefined;
 
   constructor(public globals: ThemeOptions, private activatedRoute: ActivatedRoute, public api: ApiService, public router: Router) {
 
   }
 
-  @select('config') public config$: Observable<any>;
-
-  private newInnerWidth: number;
-  private innerWidth: number;
+  private newInnerWidth: number | undefined;
+  private innerWidth: number | undefined;
   activeId = 'dashboardsMenu';
 
   toggleSidebar() {
@@ -43,16 +40,13 @@ export class SidebarComponent implements OnInit {
     this.api.collectionService.getPlayerCollections(this.user).subscribe((collections) => {
       this.collections = collections;
     });
-
-    this.extraParameter = this.activatedRoute.snapshot.firstChild.data.extraParameter;
-
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize(event: { target: { innerWidth: number }; }) {
     this.newInnerWidth = event.target.innerWidth;
 
-    if (this.newInnerWidth < 1200) {
+    if (this.newInnerWidth < 1200 ) {
       this.globals.toggleSidebar = true;
     } else {
       this.globals.toggleSidebar = false;
@@ -64,7 +58,7 @@ export class SidebarComponent implements OnInit {
     return this.collections;
   }
 
-  goToCollection(collectionId) {
+  goToCollection(collectionId: string) {
     this.router.navigate(['/cards/' + collectionId]);
   }
 }

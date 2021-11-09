@@ -1,27 +1,5 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgReduxModule} from '@angular-redux/store';
-import {NgRedux, DevToolsExtension} from '@angular-redux/store';
-import {rootReducer, ArchitectUIState} from './ThemeOptions/store';
-import {ConfigActions} from './ThemeOptions/store/config.actions';
-import {AppRoutingModule} from './app-routing.module';
-import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
-
-import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
-import {AppComponent} from './app.component';
-
-// BOOTSTRAP COMPONENTS
-
-import {AngularFontAwesomeModule} from 'angular-font-awesome';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
-import {PERFECT_SCROLLBAR_CONFIG} from 'ngx-perfect-scrollbar';
-import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
-import {ChartsModule} from 'ng2-charts';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // LAYOUT
 
 import {BaseLayoutComponent} from './Layout/base-layout/base-layout.component';
@@ -59,7 +37,6 @@ import {RegisterBoxedComponent} from './DemoPages/UserPages/register-boxed/regis
 
 import {StandardComponent} from './DemoPages/Elements/Buttons/standard/standard.component';
 import {DropdownsComponent} from './DemoPages/Elements/dropdowns/dropdowns.component';
-import {CardsComponent} from './DemoPages/Cards/cards.component';
 import {ListGroupsComponent} from './DemoPages/Elements/list-groups/list-groups.component';
 import {TimelineComponent} from './DemoPages/Elements/timeline/timeline.component';
 import {IconsComponent} from './DemoPages/Elements/icons/icons.component';
@@ -103,10 +80,25 @@ import {BubbleChartComponent} from './DemoPages/Charts/chartjs/examples/bubble-c
 import {DynamicChartComponent} from './DemoPages/Charts/chartjs/examples/dynamic-chart/dynamic-chart.component';
 import {DoughnutChartComponent} from './DemoPages/Charts/chartjs/examples/doughnut-chart/doughnut-chart.component';
 import {PieChartComponent} from './DemoPages/Charts/chartjs/examples/pie-chart/pie-chart.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { ArchitectUIState, rootReducer } from './ThemeOptions/store';
+import { ConfigActions } from './ThemeOptions/store/config.actions';
+import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ChartsModule } from 'ng2-charts';
+import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { CardsCollectionComponent } from './DemoPages/CardsCollection/cards-collection.component';
 import { ShopComponent } from './DemoPages/Shop/shop.component';
 import { TradeComponent } from './DemoPages/Trades/trade.component';
 import { ConnexionComponent } from './DemoPages/Connexion/connexion.component';
-import { CardsCollectionComponent } from './DemoPages/CardsCollection/cards-collection.component';
+import { CardsComponent } from './DemoPages/Cards/cards.component';
 import { CodeComponent } from './DemoPages/Code/code.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -149,7 +141,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ForgotPasswordBoxedComponent,
     LoginBoxedComponent,
     RegisterBoxedComponent,
-    ConnexionComponent,
 
     // Elements
 
@@ -199,22 +190,22 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BubbleChartComponent,
     ScatterChartComponent,
 
-    // CARDS.IO
+    // CARDS.IO5
     CardsComponent,
+    CardsCollectionComponent,
     ShopComponent,
     TradeComponent,
-    CardsCollectionComponent,
-    CodeComponent,
+    ShopComponent,
+    ConnexionComponent,
+    CodeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     NgReduxModule,
     CommonModule,
     LoadingBarRouterModule,
-    HttpClientModule,
-
+    BrowserAnimationsModule,
     // Angular Bootstrap Components
 
     PerfectScrollbarModule,

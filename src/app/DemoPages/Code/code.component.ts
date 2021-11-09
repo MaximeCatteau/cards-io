@@ -13,9 +13,9 @@ export class CodeComponent implements OnInit {
 
   isLoading = true;
   username = null;
-  cardWin;
+  cardWin: any;
 
-  closeResult: string;
+  closeResult: string | undefined;
 
   codeForm = new FormGroup({
     codeValue: new FormControl('')
@@ -32,8 +32,8 @@ export class CodeComponent implements OnInit {
     
   }
 
-  open(content) {
-    this.api.codeService.consumeCode(localStorage.user, this.codeForm.value.codeValue).subscribe((card) => {
+  open(content: any) {
+    this.api.codeService.consumeCode(localStorage['user'], this.codeForm.value.codeValue).subscribe((card: any) => {
       console.log(card);
       
       this.cardWin = card[0];

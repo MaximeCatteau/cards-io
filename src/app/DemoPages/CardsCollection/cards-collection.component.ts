@@ -9,12 +9,12 @@ import { ApiService } from 'src/app/Services/api.service';
 })
 export class CardsCollectionComponent implements OnInit {
 
-  cards = [];
-  collectionCards;
+  cards = <any>[];
+  collectionCards: any;
   isLoading = true;
   username = null;
-  collectionId;
-  cardCount;
+  collectionId: string | undefined;
+  cardCount: number | any;
   DEFAULT_CARD = "https://i.ibb.co/RNBJD9f/default-card.png";
 
   constructor(public api: ApiService, public route: ActivatedRoute, public router: Router) {
@@ -36,15 +36,15 @@ export class CardsCollectionComponent implements OnInit {
   }
 
   getPlayerCardsInCollection() {
-    return this.api.cards.getPlayerCardsByCollection(localStorage.user, this.collectionId).subscribe((playerCards) => {
+    return this.api.cards.getPlayerCardsByCollection(localStorage['user'], this.collectionId).subscribe((playerCards) => {
       this.collectionCards = playerCards;
       console.log(this.collectionCards);
     });
   }
 
-  userHasCard(index) {
+  userHasCard(index: number) {
     if (this.collectionCards) {
-      const find = this.collectionCards.find((c) => {
+      const find = this.collectionCards.find((c: { idInCollection: any; }) => {
         if (c.idInCollection === index) {
           return true;
         } else {
@@ -61,7 +61,7 @@ export class CardsCollectionComponent implements OnInit {
   }
 
   composeCards() {
-    this.cards = [];
+    this.cards = <any>[];
 
     for (let i = 1; i <= this.cardCount; i++) {
       if (this.userHasCard(i) === this.DEFAULT_CARD) {

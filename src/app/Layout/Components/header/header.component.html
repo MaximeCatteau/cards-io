@@ -1,4 +1,4 @@
-<div [class]="'app-header header-shadow ' + (config$ | async).headerTheme" *ngIf="user">
+<div [class]="'app-header header-shadow'" *ngIf="user">
   <div class="logo-src"></div>
   <div class="app-header__content">
     <div class="app-header-right">
@@ -6,7 +6,7 @@
     </div>
   </div>
 </div>
-<div [class]="'app-header header-shadow ' + (config$ | async).headerTheme" *ngIf="!user">
+<div [class]="'app-header header-shadow'" *ngIf="!user">
   <div class="logo-src"></div>
   <div class="app-header__content">
     <div class="app-header-right">

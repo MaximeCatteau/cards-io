@@ -18,12 +18,12 @@ export class ApiService {
       return get;
     },
 
-    getAllPlayerCards: (username) => {
+    getAllPlayerCards: (username: any) => {
       const get = this.http.get(this.baseUrl + 'player/cards', { params: { playerName: username }});
       return get;
     },
 
-    getPlayerCardsByCollection: (username, collectionId) => {
+    getPlayerCardsByCollection: (username: any, collectionId: any) => {
       const body = {
         username: username,
         password: ''
@@ -31,7 +31,7 @@ export class ApiService {
 
       const params = {
         collectionId: collectionId
-      }
+      } 
 
       const post = this.http.post(this.baseUrl + 'player/cards/collection', body, { params: params });
 
@@ -40,7 +40,7 @@ export class ApiService {
   }
 
   public collectionService = {
-    getPlayerCollections: (username) => {
+    getPlayerCollections: (username: any) => {
       const body = {
         username: username,
         password: ''
@@ -51,7 +51,7 @@ export class ApiService {
       return post;
     },
 
-    getCollectionCardCount: (collectionId) => {
+    getCollectionCardCount: (collectionId: any) => {
       const params = {
         collectionId: collectionId
       };
@@ -61,7 +61,7 @@ export class ApiService {
       return get;
     },
 
-    getCollectionsNotAlreadyPaidByUser: (username) => {
+    getCollectionsNotAlreadyPaidByUser: (username: any) => {
       const body = {
         username: username,
         password: ''
@@ -72,7 +72,7 @@ export class ApiService {
       return post;
     },
 
-    buyCollection: (username, collectionId) => {
+    buyCollection: (username: any, collectionId: any) => {
       const body = {
         username: username,
         password: ''
@@ -89,7 +89,7 @@ export class ApiService {
   }
 
   public userService = {
-    signIn: (username, password) => {
+    signIn: (username: any, password: any) => {
       const body = {
         username: username,
         password: password
@@ -99,7 +99,7 @@ export class ApiService {
 
       return post;
     },
-    signUp: (username, password) => {
+    signUp: (username: any, password: any) => {
       const body = {
         username: username,
         password: password
@@ -112,7 +112,7 @@ export class ApiService {
   }
 
   public codeService = {
-    consumeCode: (username, code) => {
+    consumeCode: (username: any, code: any) => {
       const body = {
         username: username,
         password: ''
