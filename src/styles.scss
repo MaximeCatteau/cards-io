@@ -1,1 +1,16 @@
 @import "assets/base";
+
+.stamp {
+    background-color: red;
+    color: white;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    padding: 1px;
+    border-radius: 50%;
+    position: absolute;
+    font-weight: 600;
+    top: -10px;
+    left: 230px;
+    z-index: 9999;
+}

@@ -44,8 +44,8 @@ export class CardsCollectionComponent implements OnInit {
 
   userHasCard(index: number) {
     if (this.collectionCards) {
-      const find = this.collectionCards.find((c: { idInCollection: any; }) => {
-        if (c.idInCollection === index) {
+      const find = this.collectionCards.find((c: { card: any; }) => {
+        if (c.card.idInCollection === index) {
           return true;
         } else {
           return false;
@@ -53,7 +53,7 @@ export class CardsCollectionComponent implements OnInit {
       });
 
       if (find) {
-        return find.imageUrl;
+        return find;
       } else {
         return this.DEFAULT_CARD;
       }
@@ -65,12 +65,19 @@ export class CardsCollectionComponent implements OnInit {
 
     for (let i = 1; i <= this.cardCount; i++) {
       if (this.userHasCard(i) === this.DEFAULT_CARD) {
-        this.cards.push(this.DEFAULT_CARD);
+        this.cards.push({imageUrl: this.DEFAULT_CARD, quantity: 0});
       } else {
-        this.cards.push(this.userHasCard(i));
+        const card = this.userHasCard(i);
+        console.log(card);
+        
+        this.cards.push({imageUrl: card.card.imageUrl, quantity: card.cardQuantity});
       }
     }
 
     return this.cards;
+  }
+
+  public getCardQuantity(card) {
+    return card.cardQuantity;
   }
 }

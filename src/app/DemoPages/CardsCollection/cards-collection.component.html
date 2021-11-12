@@ -3,9 +3,13 @@
 </div>
 
 <div class="row">
-  <div class="col-3 mb-3" *ngFor="let url of composeCards(); let i = index">
+  <div class="col-3 mb-3" *ngFor="let card of composeCards()">
+    <!-- Pastille -->
+    <div class="stamp" *ngIf="card.quantity > 1">
+      x{{ card.quantity }}
+    </div>
     <div class="card card-body">
-      <img src="{{ url }}"/>
+      <img src="{{ card.imageUrl }}"/>
     </div>
   </div>
 </div>

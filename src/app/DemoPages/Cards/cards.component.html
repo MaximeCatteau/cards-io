@@ -4,8 +4,12 @@
 
 <div class="row">
   <div class="col-3 mb-3" *ngFor="let card of getCards()">
+    <!-- Pastilles -->
+    <div class="stamp" *ngIf="getCardQuantity(card) > 1">
+      x{{ getCardQuantity(card)}}
+    </div>
     <div class="card card-body">
-      <img src="{{ card.imageUrl }}"/>
+      <img src="{{ card.card.imageUrl }}"/>
     </div>
   </div>
 </div>

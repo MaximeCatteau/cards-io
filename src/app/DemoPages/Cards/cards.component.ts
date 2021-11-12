@@ -5,7 +5,7 @@ import { ApiService } from 'src/app/Services/api.service';
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
-  styles: []
+  styles: ['./cards.component.scss']
 })
 export class CardsComponent implements OnInit {
 
@@ -29,4 +29,7 @@ export class CardsComponent implements OnInit {
     return this.cards;
   }
 
+  public getCardQuantity(card) {
+    return card.cardQuantity;
+  }
 }
