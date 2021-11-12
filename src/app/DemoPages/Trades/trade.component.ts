@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { ApiService } from 'src/app/Services/api.service';
 
 @Component({
   selector: 'app-trade',
@@ -6,14 +7,21 @@ import {Component, OnInit} from '@angular/core';
   styles: []
 })
 export class TradeComponent implements OnInit {
-  heading = 'Échanges';
-  subheading = 'Huge selection of charts created with the Vue ChartJS Plugin';
-  icon = 'pe-7s-bandaid icon-gradient bg-amy-crisp';
 
-  constructor() {
+  constructor(public api: ApiService) {
   }
 
   ngOnInit() {
+  }
+
+  buy(collection: any) {
+    const cashOfUser = +localStorage['userCash'];
+    if (cashOfUser >= collection.price) {
+      localStorage['userCash'] = cashOfUser - collection.price;
+      this.api.collectionService.buyCollection(localStorage['user'], collection.id).subscribe((res) => {
+        console.log("### BUY COLLECTION :D");   
+      });
+    }
   }
 
 }
