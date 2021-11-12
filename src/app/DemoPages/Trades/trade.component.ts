@@ -8,6 +8,8 @@ import { ApiService } from 'src/app/Services/api.service';
 })
 export class TradeComponent implements OnInit {
 
+  public isLoading = false;
+
   constructor(public api: ApiService) {
   }
 
