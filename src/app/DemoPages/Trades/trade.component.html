@@ -1,35 +1,246 @@
 <div *ngIf="isLoading">
-    Chargement en cours...
-  </div>
-  
-  <div class="main-card mb-3 card" *ngIf="!isLoading">
-    <div class="card-header">
-      Boutique de collections
+  Chargement en cours...
+</div>
+
+<!-- CREER UN ECHANGE -->
+<div class="app-page-title">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div class="page-title-icon">
+        <i class="icon {{icon}}"></i>
+      </div>
+      <div>
+        {{ heading }}
+        <div
+          class="page-title-subheading">
+          {{ subheading }}
+        </div>
+      </div>
     </div>
-    <div class="table-responsive">
-      <table class="align-middle mb-0 table table-borderless table-striped table-hover">
-        <thead>
-        <tr>
-          <th>Collection</th>
-          <th class="text-center">Catégorie</th>
-          <th class="text-center">Prix</th>
-          <th class="text-center"></th>
-        </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              1
-            </td>
-            <td class="text-center">1</td>
-            <td class="text-center">
-              1
-            </td>
-            <td class="text-center">
-              <button type="button" class="btn btn-success btn-sm" (click)="buy()">Acheter</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="page-title-actions">
+      <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success" (click)="createTrade(content)">
+        <fa class="mr-2" name="plus"></fa>
+        Créer un échange
+      </button>
+      <!-- MODAL DE CREATION -->
+      <div class="card-body">
+        <ng-template #content let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Créer un échange</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center">
+              <div class="btn-group btn-group-toggle" ngbRadioGroup [(ngModel)]="currentJustify">
+                <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                  <input ngbButton type="radio" value="only_doubles">Seulement les cartes en double
+                </label>
+                <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                  <input ngbButton type="radio" value="all">Toutes les cartes
+                </label>
+              </div>
+            </div>
+            <form [formGroup]="createTradeForm">
+              <select class="mt-2 mb-2 form-control" formControlName="card">
+                <option [value]="double.cardId" *ngFor="let double of playerDoubles">
+                  {{ double.cardLabel }} ({{ double.collectionLabel }}) - x{{ double.cardQuantity }}
+                </option>
+              </select>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-error" (click)="c('Close click')">Annuler</button>
+            <button type="button" class="btn btn-success" (click)="create()">Créer</button>
+          </div>
+        </ng-template>
+      </div>
     </div>
   </div>
+</div>
+
+<!-- TABS -->
+<div class="card main-card mb-3" *ngIf="!isLoading">
+  <div class="card-header">
+    Zone d'échange
+  </div>
+  <div class="card-body">
+    <ngb-tabset>
+      <ngb-tab title="Tous les échanges">
+        <ng-template ngbTabContent>
+          <table class="align-middle mb-0 table table-borderless table-striped table-hover">       
+            <tbody>
+              <tr *ngFor="let trade of tradesForStepOne">
+                <td>
+                  {{ trade.transmitterName }} propose d'échanger sa carte <b>{{ trade.cardLabel }}</b> (<i>{{ trade.collectionLabel }}</i>)
+                </td>
+                <td *ngIf="trade.propositionCount === 0">
+                  Pas encore de proposition
+                </td>
+                <td *ngIf="trade.propositionCount === 1">
+                  1 proposition
+                </td>
+                <td *ngIf="trade.propositionCount > 1">
+                  {{ trade.propositionCount }} propositions
+                </td>
+                <td class="text-center" *ngIf="!isSameUser(trade.transmitterName)">
+                  <button type="button" class="btn btn-success btn-sm" (click)="createProposition(content, trade)">Faire une proposition</button>
+                </td>
+                <td class="text-center" *ngIf="isSameUser(trade.transmitterName)">
+                  <button type="button" class="btn btn-danger btn-sm">Annuler l'échange</button>
+                </td>
+                <!-- MODAL DE PROPOSITION -->
+                <div class="card-body">
+                  <ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                      <h4 class="modal-title">{{ trade.cardLabel }}</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="text-center">
+                        <b>{{ trade.transmitterName }}</b> voudrait échanger sa carte <b>{{ trade.cardLabel }}</b> (<i>{{ trade.collectionLabel }}</i>)
+                        <div>
+                          Quelle carte souhaitez-vous lui proposer ?
+                        </div>
+                        
+                        <div class="btn-group btn-group-toggle" ngbRadioGroup [(ngModel)]="currentJustify">
+                          <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                            <input ngbButton type="radio" value="only_doubles">Seulement les cartes en double
+                          </label>
+                          <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                            <input ngbButton type="radio" value="all">Toutes les cartes
+                          </label>
+                        </div>
+                        <form [formGroup]="createPropositionForm">
+                          <select class="mt-2 mb-2 form-control" formControlName="card">
+                            <option [value]="double.cardId" *ngFor="let double of playerDoubles">
+                              {{ double.cardLabel }} ({{ double.collectionLabel }}) - x{{ double.cardQuantity }}
+                            </option>
+                          </select>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-error" (click)="c('Close click')">Annuler</button>
+                      <button type="button" class="btn btn-success" (click)="createProp(trade)">Créer</button>
+                    </div>
+                  </ng-template>
+                </div>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Mes échanges">
+        <ng-template ngbTabContent>
+          <table class="align-middle mb-0 table table-borderless table-striped table-hover">       
+            <tbody>
+              <tr *ngFor="let trade of playerTrades">
+                <td>
+                  Vous proposez d'échanger votre carte <b>{{ trade.cardLabel }}</b> (<i>{{ trade.collectionLabel }}</i>)
+                </td>
+                <td *ngIf="trade.propositionCount === 0">
+                  Pas encore de proposition
+                </td>
+                <td *ngIf="trade.propositionCount === 1">
+                  1 proposition
+                </td>
+                <td *ngIf="trade.propositionCount > 1">
+                  {{ trade.propositionCount }} propositions
+                </td>
+                <td class="text-center">
+                  <button type="button" class="btn btn-danger btn-sm">Annuler l'échange</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Mes propositions">
+        <ng-template ngbTabContent>
+          <table class="align-middle mb-0 table table-borderless table-striped table-hover">  
+            <thead>
+              <tr>
+                <th>Carte concernée</th>
+                <th class="text-center">Carte proposée</th>
+                <th class="text-center">Émetteur</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>     
+            <tbody>
+              <tr *ngFor="let tradeProp of playerPropositions">
+                <td *ngIf="tradeProp.propositionEmitter !== 'Vous'">
+                  <b>{{ tradeProp.cardConcernedLabel }} (<i>{{ tradeProp.cardConcernedCollectionLabel }}</i>)</b>
+                </td>
+                <td *ngIf="tradeProp.propositionEmitter === 'Vous'">
+                  {{ tradeProp.cardConcernedLabel }} (<i>{{ tradeProp.cardConcernedCollectionLabel }}</i>)
+                </td>
+                <td *ngIf="tradeProp.propositionEmitter === 'Vous'">
+                  <b>{{ tradeProp.cardProposedLabel }} (<i>{{ tradeProp.cardProposedCollectionLabel }}</i>)</b>
+                </td>
+                <td *ngIf="tradeProp.propositionEmitter !== 'Vous'">
+                  {{ tradeProp.cardProposedLabel }} (<i>{{ tradeProp.cardProposedCollectionLabel }}</i>)
+                </td>
+                <td>
+                  {{ tradeProp.propositionEmitter }}
+                </td>
+                <td *ngIf="tradeProp.propositionEmitter !== 'Vous'">
+                  <button type="button" class="btn btn-danger btn-sm" (click)="refuseProposition(tradeProp.tradePropositionId)">Refuser</button>
+                  <button type="button" class="btn btn-success btn-sm" (click)="acceptProposition(content, tradeProp.tradeId, tradeProp.tradePropositionId)">Accepter</button>
+                </td>
+                <!-- MODAL DE CONFIRMATION D'ECHANGE -->
+                <div class="card-body">
+                  <ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Échange réussi</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="text-center">
+                        Félicitations, vous avez échangé votre carte <b>{{ tradeProp.cardConcernedLabel }}</b> (<i>{{ tradeProp.cardConcernedCollectionLabel }}</i>) contre la carte <b>{{ tradeProp.cardProposedLabel }}</b> (<i>{{ tradeProp.cardProposedCollectionLabel }}</i>) de {{ tradeProp.propositionEmitter }}
+                      </div>
+                      <div class="card card-body">
+                        <img src="{{ cardTraded?.imageUrl }}">
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-success" (click)="redirectToCollectionPage()">Allons voir ça !</button>
+                    </div>
+                  </ng-template>
+                </div>
+                <td *ngIf="tradeProp.propositionEmitter === 'Vous'">
+                  <button type="button" class="btn btn-danger btn-sm" (click)="cancelProposition(tradeProp.tradeId, tradeProp.cardProposedLabel, tradeProp.tradePropositionId)">Annuler la proposition</button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <i>* en gras, votre carte</i>
+            </tfoot>
+          </table>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Échanges terminés">
+        <ng-template ngbTabContent>
+          <p class="mt-3">Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam.
+            Nulla facilisi.
+            Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu,
+            congue et odio.
+            Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et.
+            Sed diam urna,
+            egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus
+            nisl enim, nec
+            tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque
+            penatibus et
+            magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet
+            ultricies in eget neque.
+            Phasellus nec tortor vel tellus pulvinar feugiat.</p>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+</div>

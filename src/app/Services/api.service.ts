@@ -36,6 +36,17 @@ export class ApiService {
       const post = this.http.post(this.baseUrl + 'player/cards/collection', body, { params: params });
 
       return post;
+    },
+
+    getDoublesForTradeCreation: (username: any) => {
+      const body = {
+        username: username,
+        password: ''
+      };
+
+      const post = this.http.post(this.baseUrl + 'player/cards/doubles', body);
+
+      return post;
     }
   }
 
@@ -125,6 +136,82 @@ export class ApiService {
       const post = this.http.post(this.baseUrl + 'consume', body, { params: params });
 
       return post;
+    }
+  }
+
+  public tradeService = {
+    getAllTradesInStepOne: () => {
+      const get = this.http.get(this.baseUrl + 'trades/stepOne');
+
+      return get;
+    },
+
+    getAllPlayerTrades: (username) => {
+      const get = this.http.get(this.baseUrl + 'trades/player', { params: { playerName: username }});
+
+      return get;
+    },
+
+    createTrade: (username, cardId) => {
+      const body = {
+        username: username,
+        password: ''
+      };
+
+      const params = {
+        cardProposedId: cardId
+      };
+
+      const post = this.http.post(this.baseUrl + 'player/cards/trade/create', body, { params: params});
+
+      return post;
+    },
+
+    createProposition: (username, tradeId, cardId) => {
+      const body = {
+        username: username,
+        password: ''
+      };
+
+      const params = {
+        tradeId: tradeId,
+        traderCardId: cardId
+      };
+      const post = this.http.post(this.baseUrl + 'trades/proposition', body, { params: params});
+
+      return post;
+    },
+
+    getAllPlayerPropositions: (username) => {
+      const get = this.http.get(this.baseUrl + 'trades/propositions', { params: { playerName: username }});
+
+      return get;
+    },
+
+    makeTrade: (username, tradeId, tradePropositionId) => {
+      const body = {
+        username: username,
+        password: ''
+      };
+
+      const params = {
+        tradeId: tradeId,
+        tradePropositionId: tradePropositionId
+      };
+
+      const post = this.http.post(this.baseUrl + 'trades/trade/make', body, { params: params });
+
+      return post;
+    },
+
+    refuseTradeProposition: (tradePropositionId) => {
+      const params = {
+        tradePropositionId: tradePropositionId
+      };
+
+      const deleteRequest = this.http.delete(this.baseUrl + 'trades/proposition/refuse', { params: params });
+
+      return deleteRequest;
     }
   }
 }
