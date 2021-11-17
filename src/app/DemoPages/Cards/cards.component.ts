@@ -17,7 +17,7 @@ export class CardsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.api.cards.getAllPlayerCards(localStorage['user']).subscribe((response) => {
+    this.api.cards.getAllPlayerCards(localStorage['token']).subscribe((response) => {
       if (response) {
         this.cards = response;
         this.isLoading = false;

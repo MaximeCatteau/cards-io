@@ -36,9 +36,8 @@ export class CardsCollectionComponent implements OnInit {
   }
 
   getPlayerCardsInCollection() {
-    return this.api.cards.getPlayerCardsByCollection(localStorage['user'], this.collectionId).subscribe((playerCards) => {
+    return this.api.cards.getPlayerCardsByCollection(localStorage['token'], this.collectionId).subscribe((playerCards) => {
       this.collectionCards = playerCards;
-      console.log(this.collectionCards);
     });
   }
 
@@ -68,7 +67,6 @@ export class CardsCollectionComponent implements OnInit {
         this.cards.push({imageUrl: this.DEFAULT_CARD, quantity: 0});
       } else {
         const card = this.userHasCard(i);
-        console.log(card);
         
         this.cards.push({imageUrl: card.card.imageUrl, quantity: card.cardQuantity});
       }

@@ -27,15 +27,12 @@ export class CodeComponent implements OnInit {
   ngOnInit() {
   }
 
-  validCode() {
-    console.log(this.codeForm.value.codeValue);
-    
-  }
-
   open(content: any) {
-    this.api.codeService.consumeCode(localStorage['user'], this.codeForm.value.codeValue).subscribe((card: any) => {
-      console.log(card);
-      
+    if (!localStorage['token']) {
+      this.router.navigate(['']);
+    }
+
+    this.api.codeService.consumeCode(localStorage['token'], this.codeForm.value.codeValue).subscribe((card: any) => {
       this.cardWin = card[0];
 
       this.modalService.open(content).result.then((result) => {

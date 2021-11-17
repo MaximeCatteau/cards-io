@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiService {
 
-  //private baseUrl = 'http://localhost:8080/';
-  private baseUrl = 'https://young-waters-05741.herokuapp.com/';
+  private baseUrl = 'http://localhost:8080/';
+  //private baseUrl = 'https://young-waters-05741.herokuapp.com/';
 
   constructor(public http: HttpClient) { }
 
@@ -18,46 +18,32 @@ export class ApiService {
       return get;
     },
 
-    getAllPlayerCards: (username: any) => {
-      const get = this.http.get(this.baseUrl + 'player/cards', { params: { playerName: username }});
+    getAllPlayerCards: (token: any) => {
+      const get = this.http.get(this.baseUrl + 'player/cards', { params: { token: token }});
       return get;
     },
 
-    getPlayerCardsByCollection: (username: any, collectionId: any) => {
-      const body = {
-        username: username,
-        password: ''
-      };
-
+    getPlayerCardsByCollection: (token: any, collectionId: any) => {
       const params = {
+        token: token,
         collectionId: collectionId
       } 
 
-      const post = this.http.post(this.baseUrl + 'player/cards/collection', body, { params: params });
+      const post = this.http.post(this.baseUrl + 'player/cards/collection', { }, { params: params });
 
       return post;
     },
 
-    getDoublesForTradeCreation: (username: any) => {
-      const body = {
-        username: username,
-        password: ''
-      };
-
-      const post = this.http.post(this.baseUrl + 'player/cards/doubles', body);
+    getDoublesForTradeCreation: (token: any) => {
+      const post = this.http.post(this.baseUrl + 'player/cards/doubles', { }, { params: { token: token }});
 
       return post;
     }
   }
 
   public collectionService = {
-    getPlayerCollections: (username: any) => {
-      const body = {
-        username: username,
-        password: ''
-      };
-
-      const post = this.http.post(this.baseUrl + 'collections/owned', body);
+    getPlayerCollections: (token: any) => {
+      const post = this.http.post(this.baseUrl + 'collections/owned', {}, { params: { token: token }});
 
       return post;
     },
@@ -72,28 +58,19 @@ export class ApiService {
       return get;
     },
 
-    getCollectionsNotAlreadyPaidByUser: (username: any) => {
-      const body = {
-        username: username,
-        password: ''
-      };
-
-      const post = this.http.post(this.baseUrl + 'collections/notAlreadyPaid', body);
+    getCollectionsNotAlreadyPaidByUser: (token: any) => {
+      const post = this.http.post(this.baseUrl + 'collections/notAlreadyPaid', {}, { params: { token: token}});
 
       return post;
     },
 
-    buyCollection: (username: any, collectionId: any) => {
-      const body = {
-        username: username,
-        password: ''
-      };
-
+    buyCollection: (token: any, collectionId: any) => {
       const params = {
+        token: token,
         collectionId: collectionId
       };
 
-      const post = this.http.post(this.baseUrl + 'collections/buy', body, { params: params });
+      const post = this.http.post(this.baseUrl + 'collections/buy', { }, { params: params });
 
       return post;
     }
@@ -119,21 +96,22 @@ export class ApiService {
       const post = this.http.post(this.baseUrl + 'signup', body);
 
       return post;
+    },
+    logout: (token: any) => {
+      const post = this.http.post(this.baseUrl + 'logout', {}, { params: { token: token }} );
+
+      return post;
     }
   }
 
   public codeService = {
-    consumeCode: (username: any, code: any) => {
-      const body = {
-        username: username,
-        password: ''
-      };
-
+    consumeCode: (token: any, code: any) => {
       const params = {
+        token: token,
         code: code
       };
 
-      const post = this.http.post(this.baseUrl + 'consume', body, { params: params });
+      const post = this.http.post(this.baseUrl + 'consume', { }, { params: params });
 
       return post;
     }
@@ -146,60 +124,48 @@ export class ApiService {
       return get;
     },
 
-    getAllPlayerTrades: (username) => {
-      const get = this.http.get(this.baseUrl + 'trades/player', { params: { playerName: username }});
+    getAllPlayerTrades: (token) => {
+      const get = this.http.get(this.baseUrl + 'trades/player', { params: { token: token }});
 
       return get;
     },
 
-    createTrade: (username, cardId) => {
-      const body = {
-        username: username,
-        password: ''
-      };
-
+    createTrade: (token, cardId) => {
       const params = {
+        token: token,
         cardProposedId: cardId
       };
 
-      const post = this.http.post(this.baseUrl + 'player/cards/trade/create', body, { params: params});
+      const post = this.http.post(this.baseUrl + 'player/cards/trade/create', { }, { params: params});
 
       return post;
     },
 
-    createProposition: (username, tradeId, cardId) => {
-      const body = {
-        username: username,
-        password: ''
-      };
-
+    createProposition: (token, tradeId, cardId) => {
       const params = {
+        token: token,
         tradeId: tradeId,
         traderCardId: cardId
       };
-      const post = this.http.post(this.baseUrl + 'trades/proposition', body, { params: params});
+      const post = this.http.post(this.baseUrl + 'trades/proposition', { }, { params: params});
 
       return post;
     },
 
-    getAllPlayerPropositions: (username) => {
-      const get = this.http.get(this.baseUrl + 'trades/propositions', { params: { playerName: username }});
+    getAllPlayerPropositions: (token) => {
+      const get = this.http.get(this.baseUrl + 'trades/propositions', { params: { token: token }});
 
       return get;
     },
 
-    makeTrade: (username, tradeId, tradePropositionId) => {
-      const body = {
-        username: username,
-        password: ''
-      };
-
+    makeTrade: (token, tradeId, tradePropositionId) => {
       const params = {
+        token: token,
         tradeId: tradeId,
         tradePropositionId: tradePropositionId
       };
 
-      const post = this.http.post(this.baseUrl + 'trades/trade/make', body, { params: params });
+      const post = this.http.post(this.baseUrl + 'trades/trade/make', { }, { params: params });
 
       return post;
     },

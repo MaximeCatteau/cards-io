@@ -3,7 +3,7 @@
   <div class="app-header__logo">
     <div>Cards.io</div>
   </div>
-  <div class="app-sidebar-content" *ngIf="user">
+  <div class="app-sidebar-content" *ngIf="isUserConnected()">
     <div class="app-sidebar-scroll">
       <perfect-scrollbar [autoPropagation]="true">
         <div class="v-sidebar-menu vsm-default">
@@ -66,6 +66,7 @@
                 <span class="vsm-title">Code</span>
               </a>
             </div>
+            <!-- Boutique -->
             <div class="vsm-item">
               <a routerLink="/shop" routerLinkActive="active-item" class="vsm-link">
                 <i class="vsm-icon pe-7s-cash"></i>

@@ -3,7 +3,6 @@ import {select} from '@angular-redux/store';
 import {Observable} from 'rxjs';
 import {ThemeOptions} from '../../../theme-options';
 import { ApiService } from 'src/app/Services/api.service';
-import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +18,7 @@ export class HeaderComponent {
   }
 
   ngOnInit() {
+    
   }
 
   @HostBinding('class.isActive')
@@ -29,4 +29,8 @@ export class HeaderComponent {
   isActive: boolean | undefined;
 
   @select('config') public config$: any | undefined;
+
+  isUserConnected() {
+    return localStorage['token'];
+  }
 }

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/Services/api.service';
 
 @Component({
@@ -11,11 +12,11 @@ export class ShopComponent implements OnInit {
   collections: any;
   isLoading = true;
 
-  constructor(public api: ApiService) {
+  constructor(public api: ApiService, public router: Router) {
   }
 
   ngOnInit() {
-    this.api.collectionService.getCollectionsNotAlreadyPaidByUser(localStorage['user']).subscribe((col) => {
+    this.api.collectionService.getCollectionsNotAlreadyPaidByUser(localStorage['token']).subscribe((col) => {
       this.collections = col;
       
       this.isLoading = false;
@@ -26,8 +27,8 @@ export class ShopComponent implements OnInit {
     const cashOfUser = +localStorage['userCash'];
     if (cashOfUser >= collection.price) {
       localStorage['userCash'] = cashOfUser - collection.price;
-      this.api.collectionService.buyCollection(localStorage['user'], collection.id).subscribe((res) => {
-        console.log("### BUY COLLECTION :D");   
+      this.api.collectionService.buyCollection(localStorage['token'], collection.id).subscribe((res) => {
+        console.log("");
       });
     }
   }

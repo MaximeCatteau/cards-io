@@ -42,15 +42,15 @@ export class TradeComponent implements OnInit {
       this.tradesForStepOne = response;
     });
 
-    this.api.cards.getDoublesForTradeCreation(localStorage['user']).subscribe((response) => {
+    this.api.cards.getDoublesForTradeCreation(localStorage['token']).subscribe((response) => {
       this.playerDoubles = response;
     });
 
-    this.api.tradeService.getAllPlayerTrades(localStorage['user']).subscribe((response) => {
+    this.api.tradeService.getAllPlayerTrades(localStorage['token']).subscribe((response) => {
       this.playerTrades = response;
     });
 
-    this.api.tradeService.getAllPlayerPropositions(localStorage['user']).subscribe((response) => {
+    this.api.tradeService.getAllPlayerPropositions(localStorage['token']).subscribe((response) => {
       this.playerPropositions = response;
       this.isLoading = false;
     });
@@ -65,7 +65,7 @@ export class TradeComponent implements OnInit {
   }
 
   create() {
-    this.api.tradeService.createTrade(localStorage['user'], this.createTradeForm.value.card).subscribe((trade) => {
+    this.api.tradeService.createTrade(localStorage['token'], this.createTradeForm.value.card).subscribe((trade) => {
       this.playerDoubles = null;
       
       this.api.tradeService.getAllTradesInStepOne().subscribe((response) => {
@@ -93,8 +93,7 @@ export class TradeComponent implements OnInit {
   }
 
   createProp(trade) {
-    this.api.tradeService.createProposition(localStorage['user'], trade.tradeId, this.createPropositionForm.value.card).subscribe((response) => {
-      console.log(response);
+    this.api.tradeService.createProposition(localStorage['token'], trade.tradeId, this.createPropositionForm.value.card).subscribe((response) => {
       this.modalService.dismissAll();
     });
   }
@@ -110,7 +109,7 @@ export class TradeComponent implements OnInit {
   }
 
   acceptProposition(content, tradeId, propositionId) {
-    this.api.tradeService.makeTrade(localStorage['user'], tradeId, propositionId).subscribe((response) => {
+    this.api.tradeService.makeTrade(localStorage['token'], tradeId, propositionId).subscribe((response) => {
       this.cardTraded = response;
       this.modalService.open(content).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;

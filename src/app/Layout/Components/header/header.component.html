@@ -1,12 +1,12 @@
-<div [class]="'app-header header-shadow'" *ngIf="user">
+<div [class]="'app-header header-shadow'" *ngIf="isUserConnected()">
   <div class="logo-src"></div>
   <div class="app-header__content">
     <div class="app-header-right">
-      <app-user-box [username]="user" [userCash]="userCash"></app-user-box>
+      <app-user-box></app-user-box>
     </div>
   </div>
 </div>
-<div [class]="'app-header header-shadow'" *ngIf="!user">
+<div [class]="'app-header header-shadow'" *ngIf="!isUserConnected()">
   <div class="logo-src"></div>
   <div class="app-header__content">
     <div class="app-header-right">

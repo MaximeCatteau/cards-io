@@ -1,6 +1,5 @@
 import {Component, HostListener, NgIterable, OnInit} from '@angular/core';
 import {ThemeOptions} from '../../../theme-options';
-import {Observable} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import { ApiService } from 'src/app/Services/api.service';
 
@@ -30,6 +29,10 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!localStorage['token']) {
+      this.router.navigate(['/']);
+    }
+    
     setTimeout(() => {
       this.innerWidth = window.innerWidth;
       if (this.innerWidth < 1200) {
@@ -37,7 +40,7 @@ export class SidebarComponent implements OnInit {
       }
     });
 
-    this.api.collectionService.getPlayerCollections(this.user).subscribe((collections) => {
+    this.api.collectionService.getPlayerCollections(localStorage['token']).subscribe((collections) => {
       this.collections = collections;
     });
   }
@@ -60,5 +63,9 @@ export class SidebarComponent implements OnInit {
 
   goToCollection(collectionId: string) {
     this.router.navigate(['/cards/' + collectionId]);
+  }
+
+  isUserConnected() {
+    return localStorage['token'];
   }
 }

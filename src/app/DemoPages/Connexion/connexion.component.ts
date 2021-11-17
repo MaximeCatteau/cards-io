@@ -35,8 +35,8 @@ export class ConnexionComponent implements OnInit {
     this.api.userService.signIn(this.signInForm.value.pseudoConnexion, this.signInForm.value.passwordConnexion).subscribe((user: any) => {
       localStorage.setItem('user', user.username);
       localStorage.setItem('userCash', "" + user.cashCard);
+      localStorage.setItem('token', user.token);
       
-      window.location.reload();
       this.router.navigate(['cards']);
     });
   }
@@ -45,9 +45,9 @@ export class ConnexionComponent implements OnInit {
     this.api.userService.signUp(this.signUpForm.value.pseudoInscription, this.signUpForm.value.passwordInscription).subscribe((user: any) => {
       localStorage.setItem('user', user.username);
       localStorage.setItem('userCash', "" + user.cashCard);
+      localStorage.setItem('token', user.token);
 
       window.location.reload();
-      this.router.navigate(['cards']);
     });
   }
 

@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/Services/api.service';
 import {ThemeOptions} from '../../../../../theme-options';
 
 @Component({
@@ -8,18 +9,22 @@ import {ThemeOptions} from '../../../../../theme-options';
 })
 export class UserBoxComponent implements OnInit {
 
-  @Input() username: any;
-  @Input() userCash: any;
+  username: any;
+  userCash: any;
 
-  constructor(public globals: ThemeOptions, public router: Router) {
+
+  constructor(public globals: ThemeOptions, public router: Router, private api: ApiService) {
   }
 
   ngOnInit() {
+    this.username = localStorage['user'];
+    this.userCash = localStorage['userCash'];
   }
 
   logout() {
-    localStorage.clear();
-    this.router.navigate(['/']);
-    window.location.reload();
+    this.api.userService.logout(localStorage['token']).subscribe(() => {
+      localStorage.clear();
+      this.router.navigate(['/']);
+    });
   }
 }
