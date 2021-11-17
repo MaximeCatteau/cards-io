@@ -48,6 +48,8 @@ import { ShopComponent } from './DemoPages/Shop/shop.component';
 import { TablesMainComponent } from './DemoPages/Tables/tables-main/tables-main.component';
 import { TradeComponent } from './DemoPages/Trades/trade.component';
 import { ForgotPasswordBoxedComponent } from './DemoPages/UserPages/forgot-password-boxed/forgot-password-boxed.component';
+import { AnalyticsComponent } from './DemoPages/Dashboards/analytics/analytics.component';
+import { AdminComponent } from './DemoPages/Admin/admin.component';
 
 const routes: Routes = [
   {
@@ -110,7 +112,10 @@ const routes: Routes = [
 
       // Code
 
-      { path: 'code', component: CodeComponent }
+      { path: 'code', component: CodeComponent },
+
+      // Admin
+      { path: 'admin', component: AdminComponent }
 
     ]
 

@@ -73,6 +73,13 @@
                 <span class="vsm-title">Boutique</span>
               </a>
             </div>
+            <!-- Admin -->
+            <div class="vsm-item" *ngIf="player?.role === 'ADMIN'">
+              <a routerLink="/admin" routerLinkActive="active-item" class="vsm-link">
+                <i class="vsm-icon pe-7s-look"></i>
+                <span class="vsm-title">Administrateur</span>
+              </a>
+            </div>
           </div>
         </div>
       </perfect-scrollbar>

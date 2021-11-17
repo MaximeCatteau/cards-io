@@ -11,6 +11,7 @@ export class SidebarComponent implements OnInit {
   public extraParameter: any;
   public user = localStorage['user'];
   public collections: any | undefined;
+  public player: any;
 
   constructor(public globals: ThemeOptions, private activatedRoute: ActivatedRoute, public api: ApiService, public router: Router) {
 
@@ -32,7 +33,7 @@ export class SidebarComponent implements OnInit {
     if (!localStorage['token']) {
       this.router.navigate(['/']);
     }
-    
+
     setTimeout(() => {
       this.innerWidth = window.innerWidth;
       if (this.innerWidth < 1200) {
@@ -42,6 +43,12 @@ export class SidebarComponent implements OnInit {
 
     this.api.collectionService.getPlayerCollections(localStorage['token']).subscribe((collections) => {
       this.collections = collections;
+    });
+
+    this.api.userService.getPlayer(localStorage['token']).subscribe((player) => {
+      this.player = player;
+      console.log(player);
+      
     });
   }
 

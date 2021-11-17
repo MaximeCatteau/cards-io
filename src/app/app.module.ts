@@ -100,6 +100,7 @@ import { TradeComponent } from './DemoPages/Trades/trade.component';
 import { ConnexionComponent } from './DemoPages/Connexion/connexion.component';
 import { CardsComponent } from './DemoPages/Cards/cards.component';
 import { CodeComponent } from './DemoPages/Code/code.component';
+import { AdminComponent } from './DemoPages/Admin/admin.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -197,7 +198,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TradeComponent,
     ShopComponent,
     ConnexionComponent,
-    CodeComponent
+    CodeComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

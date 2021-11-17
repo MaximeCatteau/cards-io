@@ -1,0 +1,45 @@
+<div class="main-card mb-3 card">
+  <div class="card-header">
+    <div class="card-header-title font-size-lg font-weight-normal">Mes utilisateurs</div>
+  </div>
+  <div class="table-responsive">
+    <table class="align-middle text-truncate mb-0 table table-borderless">
+      <thead>
+      <tr>
+        <th class="text-center">Joueur</th>
+        <th class="text-center">Solde</th>
+        <th class="text-center">Statut</th>
+        <th class="text-center">Envoi de pièces</th>
+        <th class="text-center">Envoi de code</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let p of players">
+        <td class="text-center">{{ p.username }}</td>
+        <td class="text-center">{{ p.cashCard }}</td>
+        <td class="text-center" *ngIf="!p.token">
+          <div class="badge badge-pill badge-danger">Déconnecté</div>
+        </td>
+        <td class="text-center" *ngIf="p.token">
+          <div class="badge badge-pill badge-success">Connecté</div>
+        </td>
+        <td class="text-center">
+          <div role="group" class="btn-group-sm btn-group">
+            <button class="btn-shadow btn btn-primary" (click)="sendMoney(p.id, 5)">5</button>
+            <button class="btn-shadow btn btn-primary" (click)="sendMoney(p.id, 10)">10</button>
+            <button class="btn-shadow btn btn-primary" (click)="sendMoney(p.id, 15)">15</button>
+            <button class="btn-shadow btn btn-primary" (click)="sendMoney(p.id, 25)">25</button>
+            <button class="btn-shadow btn btn-primary" (click)="sendMoney(p.id, 50)">50</button>
+          </div>
+        </td>
+        <td class="text-center">
+          <div role="group" class="btn-group-sm btn-group">
+            <button class="btn-shadow btn btn-success" (click)="sendCode(p.id)">Envoyer un code</button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

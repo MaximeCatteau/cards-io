@@ -101,6 +101,40 @@ export class ApiService {
       const post = this.http.post(this.baseUrl + 'logout', {}, { params: { token: token }} );
 
       return post;
+    },
+    getPlayer: (token: any) => {
+      const get = this.http.get(this.baseUrl + 'player', { params: { token: token }});
+
+      return get;
+    },
+
+    getPlayers: (token: any) => {
+      const get = this.http.get(this.baseUrl + 'players', { params: { token: token }});
+
+      return get;
+    },
+
+    sendMoney: (token, userId, amount) => {
+      const params = {
+        token: token,
+        userId: userId,
+        amount: amount
+      };
+
+      const post = this.http.post(this.baseUrl + 'money', { }, { params: params });
+
+      return post;
+    },
+
+    sendCode: (token, userId) => {
+      const params = {
+        token: token,
+        userId: userId
+      };
+
+      const post = this.http.post(this.baseUrl + 'generate', { }, { params: params });
+
+      return post;
     }
   }
 
