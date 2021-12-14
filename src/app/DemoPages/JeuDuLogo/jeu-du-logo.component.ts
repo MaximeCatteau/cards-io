@@ -15,6 +15,8 @@ export class JeuDuLogoComponent implements OnInit {
   subheading = "Cette zone vous permet de consulter les résultats du Jeu du Logo";
   icon = "vsm-icon pe-7s-cup icon-gradient bg-warm-flame";
 
+  isLoading = true;
+
   player: any;
 
   league1Ladder: any;
@@ -55,6 +57,7 @@ export class JeuDuLogoComponent implements OnInit {
 
     this.api.logoService.getLeague2Ladder(localStorage['token']).subscribe((ladder) => {
       this.league2Ladder = ladder;
+      this.isLoading = false;
     });
 
     this.league1Form = this.formBuilder.group({
