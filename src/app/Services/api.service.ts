@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +28,7 @@ export class ApiService {
       const params = {
         token: token,
         collectionId: collectionId
-      } 
-
+      }
       const post = this.http.post(this.baseUrl + 'player/cards/collection', { }, { params: params });
 
       return post;
