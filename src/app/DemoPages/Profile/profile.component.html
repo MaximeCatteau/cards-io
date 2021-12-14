@@ -1,0 +1,124 @@
+<div class="row">
+  <div class="col-4">
+    <div class="card main-card mb-3">
+      <div class="card-header">
+        Cartes récupérées
+      </div>
+      <div class="card-body">
+        <div class="chart">
+          <canvas baseChart
+                  [data]="totalCardsPieChartData"
+                  [labels]="totalCardsPieChartLabels"
+                  [chartType]="pieChartType"
+                  [options]="pieChartOptions"
+                  [colors]="pieChartColors"
+                  [legend]="pieChartLegend">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card main-card mb-3">
+      <div class="card-header">
+        Collections complétées
+      </div>
+      <div class="card-body">
+        <div class="chart">
+          <canvas baseChart
+                  [data]="collectionsCompletedPieChartData"
+                  [labels]="collectionsCompletedPieChartLabels"
+                  [chartType]="pieChartType"
+                  [options]="pieChartOptions"
+                  [colors]="pieChartColors"
+                  [legend]="pieChartLegend">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card main-card mb-3">
+      <div class="card-header">
+        Collections récupérées
+      </div>
+      <div class="card-body">
+        <div class="chart">
+          <canvas baseChart
+                  [data]="collectionsToGetPieChartData"
+                  [labels]="collectionsToGetPieChartLabels"
+                  [chartType]="pieChartType"
+                  [options]="pieChartOptions"
+                  [plugins]="pieChartPlugins"
+                  [colors]="pieChartColors"
+                  [legend]="pieChartLegend">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4">
+    <div class="card main-card mb-3">
+      <div class="card-header">
+        Pièces dépensées
+      </div>
+      <div class="card-body">
+        <h1 class="text-center">{{ playerCareer?.moneySpent }}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card main-card mb-3">
+      <div class="card-header">
+        Échanges effectués
+      </div>
+      <div class="card-body">
+        <h1 class="text-center">{{ playerCareer?.tradesCompleted }}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card main-card mb-3">
+      <div class="card-header">
+        Prestige
+      </div>
+      <div class="card-body">
+        <h1 class="text-center">A venir</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card main-card mb-3">
+      <div class="card-header">
+        Progression pour chaque collection
+      </div>
+      <div class="card-body">
+        <div class="row mb-2" *ngFor="let c of collectionProgression">
+          <div class="col-1">
+            {{ c.collectionLabel }}
+          </div>
+          <div class="col-10">
+            <ngb-progressbar showValue="true" type="success" [value]="c.playerCardCountPercent"></ngb-progressbar>
+          </div>
+          <div class="col-1">
+            <i>({{ c.playerCardCount }}/{{ c.collectionCardCount }})</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-card mb-3 card">
+  <div class="card-header">
+    <div class="card-header-title font-size-lg font-weight-normal">Mes statistiques - Jeu du Logo</div>
+  </div>
+</div>
+  
+  

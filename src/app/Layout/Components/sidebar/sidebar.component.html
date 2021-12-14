@@ -73,6 +73,29 @@
                 <span class="vsm-title">Boutique</span>
               </a>
             </div>
+            <!-- Jeu du Logo -->
+            <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
+              <ngb-panel id="dashboardsMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon pe-7s-notebook"></i>
+                    <span class="vsm-title">Jeu du Logo</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLink="/jeu-du-logo" routerLinkActive="active-item" class="vsm-link">
+                          <span class="vsm-title">Saison 6</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
             <!-- Admin -->
             <div class="vsm-item" *ngIf="player?.role === 'ADMIN'">
               <a routerLink="/admin" routerLinkActive="active-item" class="vsm-link">

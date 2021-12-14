@@ -47,8 +47,6 @@ export class SidebarComponent implements OnInit {
 
     this.api.userService.getPlayer(localStorage['token']).subscribe((player) => {
       this.player = player;
-      console.log(player);
-      
     });
   }
 

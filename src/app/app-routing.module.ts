@@ -50,6 +50,8 @@ import { TradeComponent } from './DemoPages/Trades/trade.component';
 import { ForgotPasswordBoxedComponent } from './DemoPages/UserPages/forgot-password-boxed/forgot-password-boxed.component';
 import { AnalyticsComponent } from './DemoPages/Dashboards/analytics/analytics.component';
 import { AdminComponent } from './DemoPages/Admin/admin.component';
+import { ProfileComponent } from './DemoPages/Profile/profile.component';
+import { JeuDuLogoComponent } from './DemoPages/JeuDuLogo/jeu-du-logo.component';
 
 const routes: Routes = [
   {
@@ -115,7 +117,13 @@ const routes: Routes = [
       { path: 'code', component: CodeComponent },
 
       // Admin
-      { path: 'admin', component: AdminComponent }
+      { path: 'admin', component: AdminComponent },
+
+      // Profile
+      { path: 'profile', component: ProfileComponent },
+
+      // Jeu du Logo
+      { path: 'jeu-du-logo', component: JeuDuLogoComponent}
 
     ]
 

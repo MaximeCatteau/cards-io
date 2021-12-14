@@ -1,0 +1,218 @@
+<!-- CREER UNE JOURNEE -->
+<div class="app-page-title">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div class="page-title-icon">
+        <i class="icon {{icon}}"></i>
+      </div>
+      <div>
+        {{ heading }}
+        <div
+          class="page-title-subheading">
+          {{ subheading }}
+        </div>
+      </div>
+    </div>
+    <div class="page-title-actions" *ngIf="player?.role === 'ADMIN'">
+      <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success" (click)="openCreateDay(content)">
+        <fa class="mr-2" name="plus"></fa>
+        Ajouter une journée
+      </button>
+      <!-- MODAL DE CREATION -->
+      <div class="card-body">
+        <ng-template #content let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Ajouter une journée</h4>
+            <!-- <div class="row" *ngFor="let n of league1Fields; let i = index;">
+              <label for="n">{{ n }}</label>
+              <input name="n" id="n" placeholder="Pseudo du joueur..." type="text" class="form-control" formControlName="createDayFormLeague1">
+            </div> -->
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h4>Ligue 1</h4>
+            <!-- Formulaire Ligue 1 -->
+            <div *ngIf="t1.controls">
+              <div *ngFor="let player of t1.controls; let i = index">
+                <div [formGroup]="player">
+                  <label>Joueur</label>
+                  <select formControlName="playerName">
+                    <option *ngFor="let p of getLeagueOnePlayerNames()">
+                      {{ p }}
+                    </option>
+                  </select>
+                  <label>Points</label>
+                  <input type="number" formControlName="points">
+                  <label>Plus rapide ?</label>
+                  <input type="checkbox" value="false" formControlName="isFastest" checked="false">
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-success" (click)="addPlayerField(1)">Ajouter un joueur</button>
+            <!-- Formulaire Ligue 2 -->
+            <h4>Ligue 2</h4>
+            <div *ngIf="t2.controls">
+              <div *ngFor="let player of t2.controls; let i = index">
+                <div [formGroup]="player">
+                  <label>Joueur</label>
+                  <select formControlName="playerName">
+                    <option *ngFor="let p of getLeagueTwoPlayerNames()">
+                      {{ p }}
+                    </option>
+                  </select>
+                  <label>Points</label>
+                  <input type="number" formControlName="points">
+                  <label>Plus rapide ?</label>
+                  <input type="checkbox" value="false" formControlName="isFastest" checked="false">
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-success" (click)="addPlayerField(2)">Ajouter un joueur</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-error" (click)="c('Close click')">Annuler</button>
+            <button type="button" class="btn btn-success" (click)="validateForm()">Ajouter</button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-card mb-3 card" *ngIf="!isLoading">
+  <div class="card-header">
+    Classement Ligue 1
+  </div>
+  <div class="table-responsive">
+    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th class="text-center">Joueur</th>
+        <th class="text-center">Total</th>
+        <th class="text-center">Gagnés</th>
+        <th class="text-center">Logos trouvés</th>
+        <th class="text-center">Série</th>
+        <th class="text-center">Plus rapide</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let l of league1Ladder; let i = index;">
+          <td>{{ i + 1 }}.</td>
+          <td class="text-center">{{ l.logoPlayerName }}</td>
+          <td class="text-center">{{ l.totalPoints }}</td>
+          <td class="text-center">{{ l.dayPoints }}</td>
+          <td class="text-center">{{ l.logoGuessed }}</td>
+          <td class="text-center">{{ l.streak }}</td>
+          <td class="text-center">{{ l.fastest }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="main-card mb-3 card" *ngIf="!isLoading">
+  <div class="card-header">
+    Classement Ligue 2
+  </div>
+  <div class="table-responsive">
+    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th class="text-center">Joueur</th>
+        <th class="text-center">Total</th>
+        <th class="text-center">Gagnés</th>
+        <th class="text-center">Logos trouvés</th>
+        <th class="text-center">Série</th>
+        <th class="text-center">Plus rapide</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let l of league2Ladder; let i = index;">
+          <td>{{ i + 1 }}.</td>
+          <td class="text-center">{{ l.logoPlayerName }}</td>
+          <td class="text-center">{{ l.totalPoints }}</td>
+          <td class="text-center">{{ l.dayPoints }}</td>
+          <td class="text-center">{{ l.logoGuessed }}</td>
+          <td class="text-center">{{ l.streak }}</td>
+          <td class="text-center">{{ l.fastest }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="main-card mb-3 card">
+  <div class="card-header">
+    Journées
+  </div>
+  <div class="p-0 card-body" *ngIf="currentDay">
+    <div class="row m-3">
+      <div class="col-1" (click)="changeCurrentDay('LEFT')">
+        <h1 class="text-center clickable"><i class="pe-7s-angle-left"></i></h1>
+      </div>
+      <div class="col-10" *ngIf="currentDay.day == 1">
+        <h1 class="text-center">1ère journée</h1>
+      </div>
+      <div class="col-10" *ngIf="currentDay.day != 1">
+        <h1 class="text-center">{{ getCurrentDay().day }}ème journée</h1>
+      </div>
+      <div class="col-1" (click)="changeCurrentDay('RIGHT')">
+        <h1 class="text-center"><i class="pe-7s-angle-right"></i></h1>
+      </div>
+    </div>
+    <div class="row m-3" *ngIf="getCurrentDay()">
+      <div class="col-6 text-center">
+        <h3 class="mb-2">Ligue 1</h3>
+        <div class="table-responsive">
+          <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th class="text-center">Joueur</th>
+              <th class="text-center">Points</th>
+              <th class="text-center">Plus rapide</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let l of currentDay.league1; let i = index;">
+                <td>{{ i + 1 }}.</td>
+                <td class="text-center">{{ l.logoPlayerName }}</td>
+                <td>{{ l.points }}</td>
+                <td class="text-center" *ngIf="l.fastest"><i class="pe-7s-gleam"></i></td>
+                <td class="text-center" *ngIf="!l.fastest"><i class="pe-7s-close-circle"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-6 text-center">
+        <h3 class="mb-2">Ligue 2</h3>
+        <div class="table-responsive">
+          <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th class="text-center">Joueur</th>
+              <th class="text-center">Points</th>
+              <th class="text-center">Plus rapide</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let l of currentDay.league2; let i = index;">
+                <td>{{ i + 1 }}.</td>
+                <td class="text-center">{{ l.logoPlayerName }}</td>
+                <td>{{ l.points }}</td>
+                <td class="text-center" *ngIf="l.fastest"><i class="pe-7s-gleam"></i></td>
+                <td class="text-center" *ngIf="!l.fastest"><i class="pe-7s-close-circle"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

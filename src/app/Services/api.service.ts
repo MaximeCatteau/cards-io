@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
 
   //private baseUrl = 'http://localhost:8080/';
+  
   private baseUrl = 'https://young-waters-05741.herokuapp.com/';
 
   constructor(public http: HttpClient) { }
@@ -36,6 +37,17 @@ export class ApiService {
 
     getDoublesForTradeCreation: (token: any) => {
       const post = this.http.post(this.baseUrl + 'player/cards/doubles', { }, { params: { token: token }});
+
+      return post;
+    },
+
+    buyPack: (token: any, packNumber: any) => {
+      const params = {
+        token: token,
+        packNumber: packNumber
+      };
+      
+      const post = this.http.post(this.baseUrl + 'buy/pack', { }, { params: params });
 
       return post;
     }
@@ -212,6 +224,65 @@ export class ApiService {
       const deleteRequest = this.http.delete(this.baseUrl + 'trades/proposition/refuse', { params: params });
 
       return deleteRequest;
+    }
+  }
+
+  public profileService = {
+    getCareer: (token: any) => {
+      const get = this.http.get(this.baseUrl + 'career', { params: { token: token }});
+
+      return get;
+    },
+
+    getCollectionsProgression: (token: any) => {
+      const get = this.http.get(this.baseUrl + 'career/collections', { params: { token: token }});
+
+      return get;
+    }
+  }
+
+  public logoService = {
+    getLeague1Ladder: (token: any) => {
+      const get = this.http.get(this.baseUrl + 'logo/league/1', { params: { token: token }});
+
+      return get;
+    },
+    
+    getLeague2Ladder: (token: any) => {
+      const get = this.http.get(this.baseUrl + 'logo/league/2', { params: { token: token }});
+
+      return get;
+    },
+
+    getDailyLadder: (token: any, seasonId) => {
+      const params = {
+        token: token,
+        seasonId: seasonId
+      };
+      const get = this.http.get(this.baseUrl + 'logo/daily', { params: params });
+
+      return get;
+    },
+
+    getSeasonSelected: (token: any, seasonId) => {
+      const params = {
+        token: token,
+        seasonId: seasonId
+      };
+
+      const get = this.http.get(this.baseUrl + 'logo/season', { params: params });
+
+      return get;
+    },
+
+    postNewDay: (token: any, league1: any, league2: any) => {
+      const body = {
+        league1: league1,
+        league2: league2
+      }
+      const post = this.http.post(this.baseUrl + 'logo/day', body, { params: { token: token }});
+
+      return post;
     }
   }
 }

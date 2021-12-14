@@ -128,12 +128,6 @@ export class TradeComponent implements OnInit {
   }
 
   cancelProposition(tradeId, card, propositionId) {
-    console.log("Trade Id :");
-    console.log(tradeId);
-    console.log("Card :");
-    console.log(card);
-    console.log("Proposition :");
-    console.log(propositionId);
   }
 
   redirectToCollectionPage() {

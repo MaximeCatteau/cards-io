@@ -27,4 +27,8 @@ export class UserBoxComponent implements OnInit {
       this.router.navigate(['/']);
     });
   }
+
+  goToProfile() {
+    this.router.navigate(['/profile']);
+  }
 }

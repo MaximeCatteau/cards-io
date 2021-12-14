@@ -101,6 +101,9 @@ import { ConnexionComponent } from './DemoPages/Connexion/connexion.component';
 import { CardsComponent } from './DemoPages/Cards/cards.component';
 import { CodeComponent } from './DemoPages/Code/code.component';
 import { AdminComponent } from './DemoPages/Admin/admin.component';
+import { ProfileComponent } from './DemoPages/Profile/profile.component';
+import { GaugeModule } from 'angular-gauge';
+import { JeuDuLogoComponent } from './DemoPages/JeuDuLogo/jeu-du-logo.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -199,7 +202,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ShopComponent,
     ConnexionComponent,
     CodeComponent,
-    AdminComponent
+    AdminComponent,
+    ProfileComponent,
+    JeuDuLogoComponent
   ],
   imports: [
     BrowserModule,
@@ -220,6 +225,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     // Charts
 
     ChartsModule,
+    GaugeModule.forRoot()
   ],
   providers: [
     {
