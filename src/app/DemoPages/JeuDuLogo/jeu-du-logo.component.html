@@ -137,6 +137,7 @@
         <tr *ngFor="let l of league2Ladder; let i = index;">
           <td>{{ i + 1 }}.</td>
           <td class="text-center">{{ l.logoPlayerName }}</td>
+          <div class="player_title col-12" [style.color]="l.color">{{ l.playerTitle }}</div>
           <td class="text-center">{{ l.totalPoints }}</td>
           <td class="text-center">{{ l.dayPoints }}</td>
           <td class="text-center">{{ l.logoGuessed }}</td>
