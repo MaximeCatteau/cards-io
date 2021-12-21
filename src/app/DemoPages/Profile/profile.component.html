@@ -1,4 +1,27 @@
 <div class="row">
+  <div class="col-12">
+    <div class="card main-card mb-3">
+      <div class="card-header">
+        Mes informations
+      </div>
+      <div class="card-body">
+        <div class="col-12 mb-3"><h2>{{ playerInfos?.name }}</h2></div>
+        <div class="col-12 mb-3 player_title" [style.color]="currentColor">{{ currentTitle }}</div>
+        <div class="col-12 mb-3" [formGroup]="selectTitle">
+          <select formControlName="title" [value]='playerInfos?.selectedTitle'>
+            <option *ngFor="let t of playerInfos?.titles">
+              {{ t }}
+            </option>
+          </select>
+          <button class="ml-3 btn btn-success" (click)="changeTitle()">Changer de titre</button>
+        </div>
+        <div class="col-12 mb-3" *ngIf="playerInfos?.logoGuesser">Logo Guesser</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-4">
     <div class="card main-card mb-3">
       <div class="card-header">

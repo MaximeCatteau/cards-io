@@ -64,7 +64,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "architectui-angular-free:build"
+            "browserTarget": "architectui-angular-free:build",
           },
           "configurations": {
             "production": {

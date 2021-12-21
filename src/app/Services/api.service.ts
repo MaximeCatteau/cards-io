@@ -54,7 +54,7 @@ export class ApiService {
 
   public collectionService = {
     getPlayerCollections: (token: any) => {
-      const post = this.http.post(this.baseUrl + 'collections/owned', {}, { params: { token: token }});
+      const post = this.http.post(this.baseUrl + 'collections/owned', {}, { headers: {'Access-Control-Allow-Origin': '*' },  params: { token: token }});
 
       return post;
     },
@@ -64,13 +64,13 @@ export class ApiService {
         collectionId: collectionId
       };
 
-      const get = this.http.get(this.baseUrl + 'cards/collection/length', { params: params });
+      const get = this.http.get(this.baseUrl + 'cards/collection/length', { headers: {'Access-Control-Allow-Origin': '*' },  params: params});
 
       return get;
     },
 
     getCollectionsNotAlreadyPaidByUser: (token: any) => {
-      const post = this.http.post(this.baseUrl + 'collections/notAlreadyPaid', {}, { params: { token: token}});
+      const post = this.http.post(this.baseUrl + 'collections/notAlreadyPaid', {}, { headers: {'Access-Control-Allow-Origin': '*' },  params: { token: token }});
 
       return post;
     },
@@ -94,7 +94,7 @@ export class ApiService {
         password: password
       };
 
-      const post = this.http.post(this.baseUrl + 'signin', body);
+      const post = this.http.post(this.baseUrl + 'signin', body, { headers: {'Access-Control-Allow-Origin': '*' }});
 
       return post;
     },
@@ -104,7 +104,7 @@ export class ApiService {
         password: password
       };
 
-      const post = this.http.post(this.baseUrl + 'signup', body);
+      const post = this.http.post(this.baseUrl + 'signup', body, { headers: {'Access-Control-Allow-Origin': '*' }});
 
       return post;
     },
@@ -114,13 +114,13 @@ export class ApiService {
       return post;
     },
     getPlayer: (token: any) => {
-      const get = this.http.get(this.baseUrl + 'player', { params: { token: token }});
+      const get = this.http.get(this.baseUrl + 'player', { headers: {'Access-Control-Allow-Origin': '*' },  params: { token: token }});
 
       return get;
     },
 
     getPlayers: (token: any) => {
-      const get = this.http.get(this.baseUrl + 'players', { params: { token: token }});
+      const get = this.http.get(this.baseUrl + 'players', { headers: {'Access-Control-Allow-Origin': '*' },  params: { token: token }});
 
       return get;
     },
@@ -237,6 +237,18 @@ export class ApiService {
       const get = this.http.get(this.baseUrl + 'career/collections', { params: { token: token }});
 
       return get;
+    },
+
+    getProfileInfos: (token: any, playerId: any) => {
+      const get = this.http.get(this.baseUrl + 'infos', { params: { token: token, userId: playerId }});
+
+      return get;
+    },
+
+    changeTitle: (token: any, label: any) => {
+      const post = this.http.post(this.baseUrl + 'title', { }, { params: { token: token, label: label }});
+
+      return post;
     }
   }
 

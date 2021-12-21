@@ -4,6 +4,7 @@ import { ChartOptions, ChartType } from 'chart.js';
 import { Color, Label, MultiDataSet } from 'ng2-charts';
 import { ApiService } from 'src/app/Services/api.service';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +14,14 @@ export class ProfileComponent implements OnInit {
 
   playerCareer: any;
   collectionProgression: any;
+  playerInfos: any;
+
+  selectTitle = new FormGroup({
+    title: new FormControl('')
+  });
+
+  currentTitle: any;
+  currentColor: any;
 
   // Pie
   public pieChartOptions: ChartOptions = {
@@ -49,6 +58,11 @@ export class ProfileComponent implements OnInit {
     this.api.profileService.getCareer(localStorage['token']).subscribe((career) => {
       this.playerCareer = career;
       this.setTotalCardsData();
+      this.api.profileService.getProfileInfos(localStorage['token'], this.playerCareer.playerId).subscribe((infos) => {
+        this.playerInfos = infos;
+        this.currentColor = this.playerInfos.selectedTitleColor;
+        this.currentTitle = this.playerInfos.selectedTitle;
+      });
     });
 
     this.api.profileService.getCollectionsProgression(localStorage['token']).subscribe((progression) => {
@@ -58,5 +72,12 @@ export class ProfileComponent implements OnInit {
 
   setTotalCardsData() {
     this.totalCardsPieChartData = [this.playerCareer.totalCards, this.playerCareer.totalCardsToGet];
+  }
+
+  changeTitle() {
+    this.currentTitle = this.selectTitle.value['title'];
+    this.api.profileService.changeTitle(localStorage['token'], this.selectTitle.value['title']).subscribe((t: any) => {
+      this.currentColor = t.color;
+    });
   }
 }
