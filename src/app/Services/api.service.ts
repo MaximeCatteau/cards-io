@@ -84,6 +84,18 @@ export class ApiService {
       const post = this.http.post(this.baseUrl + 'collections/buy', { }, { params: params });
 
       return post;
+    },
+
+    getAllCollections: () => {
+      const get = this.http.get(this.baseUrl + 'collections/all');
+
+      return get;
+    },
+
+    getCollectionById: (collectionId: any) => {
+      const get = this.http.get(this.baseUrl + 'collections', { params: { collectionId: collectionId }});
+
+      return get;
     }
   }
 
@@ -253,14 +265,14 @@ export class ApiService {
   }
 
   public logoService = {
-    getLeague1Ladder: (token: any) => {
-      const get = this.http.get(this.baseUrl + 'logo/league/1', { params: { token: token }});
+    getLeague1Ladder: (token: any, seasonId: any) => {
+      const get = this.http.get(this.baseUrl + 'logo/league/1', { params: { token: token, seasonId: seasonId }});
 
       return get;
     },
     
-    getLeague2Ladder: (token: any) => {
-      const get = this.http.get(this.baseUrl + 'logo/league/2', { params: { token: token }});
+    getLeague2Ladder: (token: any, seasonId: any) => {
+      const get = this.http.get(this.baseUrl + 'logo/league/2', { params: { token: token, seasonId: seasonId }});
 
       return get;
     },
@@ -295,5 +307,19 @@ export class ApiService {
 
       return post;
     }
+  }
+
+  public ladderService = {
+    getLadderByCollection: (collectionId: any) => {
+      const get = this.http.get(this.baseUrl + "collection/ladder", { params: { collectionId: collectionId }});
+
+      return get;
+    },
+
+    getGeneralLadder: () => {
+      const get = this.http.get(this.baseUrl + "collection/ladder/general");
+
+      return get;
+    },
   }
 }

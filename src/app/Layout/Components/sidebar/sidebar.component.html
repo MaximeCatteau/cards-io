@@ -78,7 +78,7 @@
               <ngb-panel id="dashboardsMenu">
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
-                    <i class="vsm-icon pe-7s-notebook"></i>
+                    <i class="vsm-icon pe-7s-search"></i>
                     <span class="vsm-title">Jeu du Logo</span>
                     <i class="vsm-arrow"></i>
                   </button>
@@ -87,8 +87,41 @@
                   <div class="vsm-dropdown">
                     <div class="vsm-list">
                       <div class="vsm-item">
-                        <a routerLink="/jeu-du-logo" routerLinkActive="active-item" class="vsm-link">
+                        <a routerLink="/jeu-du-logo/1" routerLinkActive="active-item" class="vsm-link">
                           <span class="vsm-title">Saison 6</span>
+                        </a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLink="/jeu-du-logo/2" routerLinkActive="active-item" class="vsm-link">
+                          <span class="vsm-title">Saison 7</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+            <!-- Classements -->
+            <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
+              <ngb-panel id="dashboardsMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon pe-7s-graph3"></i>
+                    <span class="vsm-title">Classements</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLink="/ladder/0" routerLinkActive="active-item" class="vsm-link">
+                          <span class="vsm-title">Classement général</span>
+                        </a>
+                      </div>
+                      <div class="vsm-item" *ngFor="let col of collectionsForLadder">
+                        <a routerLink="/ladder/{{col.id}}" routerLinkActive="active-item" class="vsm-link">
+                          <span class="vsm-title">{{ col.name }}</span>
                         </a>
                       </div>
                     </div>

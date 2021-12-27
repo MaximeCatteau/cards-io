@@ -52,6 +52,7 @@ import { AnalyticsComponent } from './DemoPages/Dashboards/analytics/analytics.c
 import { AdminComponent } from './DemoPages/Admin/admin.component';
 import { ProfileComponent } from './DemoPages/Profile/profile.component';
 import { JeuDuLogoComponent } from './DemoPages/JeuDuLogo/jeu-du-logo.component';
+import { LadderComponent } from './DemoPages/Ladder/ladder.component';
 
 const routes: Routes = [
   {
@@ -123,7 +124,10 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
 
       // Jeu du Logo
-      { path: 'jeu-du-logo', component: JeuDuLogoComponent}
+      { path: 'jeu-du-logo/:seasonId', component: JeuDuLogoComponent},
+
+      // Classements
+      { path: 'ladder/:collectionId', component: LadderComponent }
 
     ]
 

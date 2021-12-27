@@ -12,6 +12,7 @@ export class SidebarComponent implements OnInit {
   public user = localStorage['user'];
   public collections: any | undefined;
   public player: any;
+  public collectionsForLadder: any;
 
   constructor(public globals: ThemeOptions, private activatedRoute: ActivatedRoute, public api: ApiService, public router: Router) {
 
@@ -47,6 +48,10 @@ export class SidebarComponent implements OnInit {
 
     this.api.userService.getPlayer(localStorage['token']).subscribe((player) => {
       this.player = player;
+    });
+
+    this.api.collectionService.getAllCollections().subscribe((col) => {
+      this.collectionsForLadder = col;
     });
   }
 

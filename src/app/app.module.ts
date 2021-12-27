@@ -104,6 +104,7 @@ import { AdminComponent } from './DemoPages/Admin/admin.component';
 import { ProfileComponent } from './DemoPages/Profile/profile.component';
 import { GaugeModule } from 'angular-gauge';
 import { JeuDuLogoComponent } from './DemoPages/JeuDuLogo/jeu-du-logo.component';
+import { LadderComponent } from './DemoPages/Ladder/ladder.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -204,7 +205,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CodeComponent,
     AdminComponent,
     ProfileComponent,
-    JeuDuLogoComponent
+    JeuDuLogoComponent,
+    LadderComponent
   ],
   imports: [
     BrowserModule,

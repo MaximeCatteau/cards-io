@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/Services/api.service';
 
@@ -23,13 +23,14 @@ export class JeuDuLogoComponent implements OnInit {
   league2Ladder: any;
   dailyLadder: any;
   season: any;
+  seasonId: any;
   currentDay: any = null;
 
   // FIELDS FORM
   league1Form: FormGroup = new FormGroup({});
   league2Form: FormGroup = new FormGroup({});
 
-  constructor(public api: ApiService, public modalService: NgbModal, private formBuilder: FormBuilder) {}
+  constructor(public api: ApiService, public modalService: NgbModal, private formBuilder: FormBuilder, public route: ActivatedRoute) {}
 
 
   ngOnInit() {
@@ -37,27 +38,31 @@ export class JeuDuLogoComponent implements OnInit {
       this.player = player;
     });
 
-    this.api.logoService.getSeasonSelected(localStorage['token'], 1).subscribe((season) => {
-      this.season = season;
-      this.api.logoService.getDailyLadder(localStorage['token'], 1).subscribe((ladder) => {
-        this.dailyLadder = ladder;
-        const f = this.dailyLadder.find((d) => {
-          return d.day == this.season.currentDay;
+    this.route.url.subscribe((e) => {
+      this.seasonId = e[1].path;
+      this.api.logoService.getSeasonSelected(localStorage['token'], this.seasonId).subscribe((season) => {
+        this.season = season;
+        this.heading = "Jeu du Logo - " + this.season.name;
+        this.api.logoService.getDailyLadder(localStorage['token'], this.seasonId).subscribe((ladder) => {
+          this.dailyLadder = ladder;
+          const f = this.dailyLadder.find((d) => {
+            return d.day == this.season.currentDay;
+          });
+      
+          this.currentDay = f;
+          this.currentDay.league1 = this.sortCurrentDayLeague(this.currentDay.league1);
+          this.currentDay.league2 = this.sortCurrentDayLeague(this.currentDay.league2);
         });
-    
-        this.currentDay = f;
-        this.currentDay.league1 = this.sortCurrentDayLeague(this.currentDay.league1);
-        this.currentDay.league2 = this.sortCurrentDayLeague(this.currentDay.league2);
       });
-    });
 
-    this.api.logoService.getLeague1Ladder(localStorage['token']).subscribe((ladder) => {
-      this.league1Ladder = ladder;
-    });
-
-    this.api.logoService.getLeague2Ladder(localStorage['token']).subscribe((ladder) => {
-      this.league2Ladder = ladder;
-      this.isLoading = false;
+      this.api.logoService.getLeague1Ladder(localStorage['token'], this.seasonId).subscribe((ladder) => {
+        this.league1Ladder = ladder;
+      });
+  
+      this.api.logoService.getLeague2Ladder(localStorage['token'], this.seasonId).subscribe((ladder) => {
+        this.league2Ladder = ladder;
+        this.isLoading = false;
+      });
     });
 
     this.league1Form = this.formBuilder.group({
