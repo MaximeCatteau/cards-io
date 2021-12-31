@@ -6,9 +6,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ApiService {
 
-  private baseUrl = 'http://localhost:8080/';
+  //private baseUrl = 'http://localhost:8080/';
   
-  //private baseUrl = 'https://young-waters-05741.herokuapp.com/';
+  private baseUrl = 'https://young-waters-05741.herokuapp.com/';
 
   constructor(public http: HttpClient) { }
 
