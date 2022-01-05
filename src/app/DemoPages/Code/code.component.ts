@@ -28,22 +28,7 @@ export class CodeComponent implements OnInit {
   }
 
   open(content: any) {
-    console.log(this.codeForm.value.codeValue);
-
-    if (this.codeForm.value.codeValue == 1311) {
-      console.log("YES");
-      this.cardWin = {};
-      this.cardWin.id = 0;
-      this.cardWin.label = "Session MindOut - Lille";
-      this.cardWin.imageUrl = "https://lille.citycrunch.fr/wp-content/uploads/sites/6/2020/07/minout_lille-1024x769.jpg";
-      this.modalService.open(content).result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
-      }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      });
-    }
-    
-    /*if (!localStorage['token']) {
+    if (!localStorage['token']) {
       this.router.navigate(['']);
     }
 
@@ -55,7 +40,7 @@ export class CodeComponent implements OnInit {
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       });
-    });*/
+    });
   }
 
   private getDismissReason(reason: any): string {
