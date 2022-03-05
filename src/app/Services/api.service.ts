@@ -277,6 +277,18 @@ export class ApiService {
       return get;
     },
 
+    getLeague2aLadder: (token: any, seasonId: any) => {
+      const get = this.http.get(this.baseUrl + 'logo/league/2/a', { params: { token: token, seasonId: seasonId }});
+
+      return get;
+    },
+
+    getLeague2bLadder: (token: any, seasonId: any) => {
+      const get = this.http.get(this.baseUrl + 'logo/league/2/b', { params: { token: token, seasonId: seasonId }});
+
+      return get;
+    },
+
     getDailyLadder: (token: any, seasonId) => {
       const params = {
         token: token,

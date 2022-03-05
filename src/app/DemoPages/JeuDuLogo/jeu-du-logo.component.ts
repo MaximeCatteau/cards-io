@@ -21,6 +21,8 @@ export class JeuDuLogoComponent implements OnInit {
 
   league1Ladder: any;
   league2Ladder: any;
+  league2aLadder: any;
+  league2bLadder: any;
   dailyLadder: any;
   season: any;
   seasonId: any;
@@ -52,6 +54,8 @@ export class JeuDuLogoComponent implements OnInit {
           this.currentDay = f;
           this.currentDay.league1 = this.sortCurrentDayLeague(this.currentDay.league1);
           this.currentDay.league2 = this.sortCurrentDayLeague(this.currentDay.league2);
+          this.currentDay.league2a = this.sortCurrentDayLeague(this.currentDay.league2a);
+          this.currentDay.league2b = this.sortCurrentDayLeague(this.currentDay.league2b);
         });
       });
 
@@ -61,6 +65,16 @@ export class JeuDuLogoComponent implements OnInit {
   
       this.api.logoService.getLeague2Ladder(localStorage['token'], this.seasonId).subscribe((ladder) => {
         this.league2Ladder = ladder;
+        this.isLoading = false;
+      });
+
+      this.api.logoService.getLeague2aLadder(localStorage['token'], this.seasonId).subscribe((ladder) => {
+        this.league2aLadder = ladder;
+        this.isLoading = false;
+      });
+
+      this.api.logoService.getLeague2bLadder(localStorage['token'], this.seasonId).subscribe((ladder) => {
+        this.league2bLadder = ladder;
         this.isLoading = false;
       });
     });
@@ -170,5 +184,9 @@ export class JeuDuLogoComponent implements OnInit {
     this.api.logoService.postNewDay(localStorage['token'], this.f1.players.value, this.f2.players.value).subscribe((logoDay) => {
       this.modalService.dismissAll();
     });
+  }
+
+  hasGroups() {
+    return this.league2aLadder != null && this.league2aLadder.length > 0
   }
 }

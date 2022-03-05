@@ -116,7 +116,7 @@
   </div>
 </div>
 
-<div class="main-card mb-3 card" *ngIf="!isLoading">
+<div class="main-card mb-3 card" *ngIf="!isLoading && !hasGroups()">
   <div class="card-header">
     Classement Ligue 2
   </div>
@@ -135,6 +135,76 @@
       </thead>
       <tbody>
         <tr *ngFor="let l of league2Ladder; let i = index;">
+          <td>{{ i + 1 }}.</td>
+          <td class="row text-center">
+            <div class="col-12">{{ l.logoPlayerName }}</div>
+            <div class="player_title col-12" [style.color]="l.color">{{ l.playerTitle }}</div>
+          </td>
+          <td class="text-center">{{ l.totalPoints }}</td>
+          <td class="text-center">{{ l.dayPoints }}</td>
+          <td class="text-center">{{ l.logoGuessed }}</td>
+          <td class="text-center">{{ l.streak }}</td>
+          <td class="text-center">{{ l.fastest }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="main-card mb-3 card" *ngIf="!isLoading && hasGroups()">
+  <div class="card-header">
+    Classement Ligue 2 - Groupe A
+  </div>
+  <div class="table-responsive">
+    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th class="text-center">Joueur</th>
+        <th class="text-center">Total</th>
+        <th class="text-center">Gagnés</th>
+        <th class="text-center">Logos trouvés</th>
+        <th class="text-center">Série</th>
+        <th class="text-center">Plus rapide</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let l of league2aLadder; let i = index;">
+          <td>{{ i + 1 }}.</td>
+          <td class="row text-center">
+            <div class="col-12">{{ l.logoPlayerName }}</div>
+            <div class="player_title col-12" [style.color]="l.color">{{ l.playerTitle }}</div>
+          </td>
+          <td class="text-center">{{ l.totalPoints }}</td>
+          <td class="text-center">{{ l.dayPoints }}</td>
+          <td class="text-center">{{ l.logoGuessed }}</td>
+          <td class="text-center">{{ l.streak }}</td>
+          <td class="text-center">{{ l.fastest }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="main-card mb-3 card" *ngIf="!isLoading && hasGroups()">
+  <div class="card-header">
+    Classement Ligue 2 - Groupe B
+  </div>
+  <div class="table-responsive">
+    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th class="text-center">Joueur</th>
+        <th class="text-center">Total</th>
+        <th class="text-center">Gagnés</th>
+        <th class="text-center">Logos trouvés</th>
+        <th class="text-center">Série</th>
+        <th class="text-center">Plus rapide</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let l of league2bLadder; let i = index;">
           <td>{{ i + 1 }}.</td>
           <td class="row text-center">
             <div class="col-12">{{ l.logoPlayerName }}</div>
@@ -170,7 +240,7 @@
         <h1 class="text-center"><i class="pe-7s-angle-right"></i></h1>
       </div>
     </div>
-    <div class="row m-3" *ngIf="getCurrentDay()">
+    <div class="row m-3" *ngIf="getCurrentDay() && !hasGroups()">
       <div class="col-6 text-center">
         <h3 class="mb-2">Ligue 1</h3>
         <div class="table-responsive">
@@ -209,6 +279,81 @@
             </thead>
             <tbody>
               <tr *ngFor="let l of currentDay.league2; let i = index;">
+                <td>{{ i + 1 }}.</td>
+                <td class="text-center">{{ l.logoPlayerName }}</td>
+                <td>{{ l.points }}</td>
+                <td class="text-center" *ngIf="l.fastest"><i class="pe-7s-gleam"></i></td>
+                <td class="text-center" *ngIf="!l.fastest"><i class="pe-7s-close-circle"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row m-3" *ngIf="getCurrentDay() && hasGroups()">
+      <div class="col-4 text-center">
+        <h3 class="mb-2">Ligue 1</h3>
+        <div class="table-responsive">
+          <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th class="text-center">Joueur</th>
+              <th class="text-center">Points</th>
+              <th class="text-center">+ rapide</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let l of currentDay.league1; let i = index;">
+                <td>{{ i + 1 }}.</td>
+                <td class="text-center">{{ l.logoPlayerName }}</td>
+                <td>{{ l.points }}</td>
+                <td class="text-center" *ngIf="l.fastest"><i class="pe-7s-gleam"></i></td>
+                <td class="text-center" *ngIf="!l.fastest"><i class="pe-7s-close-circle"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-4 text-center">
+        <h3 class="mb-2">Ligue 2 - Groupe A</h3>
+        <div class="table-responsive">
+          <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th class="text-center">Joueur</th>
+              <th class="text-center">Points</th>
+              <th class="text-center">+ rapide</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let l of currentDay.league2a; let i = index;">
+                <td>{{ i + 1 }}.</td>
+                <td class="text-center">{{ l.logoPlayerName }}</td>
+                <td>{{ l.points }}</td>
+                <td class="text-center" *ngIf="l.fastest"><i class="pe-7s-gleam"></i></td>
+                <td class="text-center" *ngIf="!l.fastest"><i class="pe-7s-close-circle"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-4 text-center">
+        <h3 class="mb-2">Ligue 2 - Groupe B</h3>
+        <div class="table-responsive">
+          <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th class="text-center">Joueur</th>
+              <th class="text-center">Points</th>
+              <th class="text-center">+ rapide</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let l of currentDay.league2b; let i = index;">
                 <td>{{ i + 1 }}.</td>
                 <td class="text-center">{{ l.logoPlayerName }}</td>
                 <td>{{ l.points }}</td>
