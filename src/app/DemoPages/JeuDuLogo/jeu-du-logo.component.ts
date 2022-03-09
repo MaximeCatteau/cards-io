@@ -136,9 +136,19 @@ export class JeuDuLogoComponent implements OnInit {
   getLeagueTwoPlayerNames() {
     let playerNames = [];
 
-    this.league2Ladder.forEach(p => {
-      playerNames.push(p.logoPlayerName);
-    });
+    if (this.hasGroups()) {
+      this.league2aLadder.forEach(p => {
+        playerNames.push(p.logoPlayerName);
+      });
+
+      this.league2bLadder.forEach(p => {
+        playerNames.push(p.logoPlayerName);
+      });
+    } else {
+      this.league2Ladder.forEach(p => {
+        playerNames.push(p.logoPlayerName);
+      });
+    }
 
     return playerNames;
   }
