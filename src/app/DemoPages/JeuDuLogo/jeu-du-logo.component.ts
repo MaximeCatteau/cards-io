@@ -65,12 +65,10 @@ export class JeuDuLogoComponent implements OnInit {
   
       this.api.logoService.getLeague2Ladder(localStorage['token'], this.seasonId).subscribe((ladder) => {
         this.league2Ladder = ladder;
-        this.isLoading = false;
       });
 
       this.api.logoService.getLeague2aLadder(localStorage['token'], this.seasonId).subscribe((ladder) => {
         this.league2aLadder = ladder;
-        this.isLoading = false;
       });
 
       this.api.logoService.getLeague2bLadder(localStorage['token'], this.seasonId).subscribe((ladder) => {
