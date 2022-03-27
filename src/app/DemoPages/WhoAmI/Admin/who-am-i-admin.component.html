@@ -1,0 +1,72 @@
+<div class="app-page-title">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div class="page-title-icon">
+        <i class="icon {{icon}}"></i>
+      </div>
+      <div>
+        {{ heading }}
+        <div
+          class="page-title-subheading">
+          {{ subheading }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-card mb-3 card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-10 card-header-title font-size-lg font-weight-normal">Saisons</div>
+      <div class="col-2">
+        <button class="btn-shadow btn btn-success" (click)="openCreateSeason(content)">
+          Nouvelle saison
+        </button>
+        <!-- MODAL DE CREATION -->
+        <div class="card-body">
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Ajouter une saison</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="newSeason">
+                <label>Nom de la saison</label>
+                <input type="text" formControlName="name">
+                <label>Nombre total de journées</label>
+                <input type="number" formControlName="numberOfDays">
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-error" (click)="c('Close click')">Annuler</button>
+              <button type="button" class="btn btn-success" (click)="validateForm()">Ajouter</button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="align-middle text-truncate mb-0 table table-borderless">
+      <thead>
+      <tr>
+        <th class="text-center">Nom</th>
+        <th class="text-center">Journées</th>
+        <th class="text-center">Nombre de joueurs</th>
+        <th class="text-center">Statut</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of seasons">
+          <td class="text-center">{{ s.name }}</td>
+          <td class="text-center">{{ s.currentDay }}/{{ s.totalDays }}</td>
+          <td class="text-center">{{ s.numberOfPlayers }}</td>
+          <td class="text-center">{{ s.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

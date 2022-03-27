@@ -11,6 +11,7 @@ export class SidebarComponent implements OnInit {
   public extraParameter: any;
   public user = localStorage['user'];
   public collections: any | undefined;
+  public whoAmISeasons: any;
   public player: any;
   public collectionsForLadder: any;
 
@@ -53,6 +54,10 @@ export class SidebarComponent implements OnInit {
     this.api.collectionService.getAllCollections().subscribe((col) => {
       this.collectionsForLadder = col;
     });
+
+    this.api.whoAmIService.getAllWhoAmISeasons().subscribe((seasons) => {
+      this.whoAmISeasons = seasons;
+    });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -73,6 +78,10 @@ export class SidebarComponent implements OnInit {
 
   goToCollection(collectionId: string) {
     this.router.navigate(['/cards/' + collectionId]);
+  }
+
+  goToWhoAmISeason(seasonId: string) {
+    this.router.navigate(['/who-am-i/season/' + seasonId]);
   }
 
   isUserConnected() {

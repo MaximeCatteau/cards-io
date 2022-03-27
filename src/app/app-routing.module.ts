@@ -53,6 +53,8 @@ import { AdminComponent } from './DemoPages/Admin/admin.component';
 import { ProfileComponent } from './DemoPages/Profile/profile.component';
 import { JeuDuLogoComponent } from './DemoPages/JeuDuLogo/jeu-du-logo.component';
 import { LadderComponent } from './DemoPages/Ladder/ladder.component';
+import { WhoAmIAdminComponent } from './DemoPages/WhoAmI/Admin/who-am-i-admin.component';
+import { WhoAmIComponent } from './DemoPages/WhoAmI/who-am-i.component';
 
 const routes: Routes = [
   {
@@ -125,6 +127,10 @@ const routes: Routes = [
 
       // Jeu du Logo
       { path: 'jeu-du-logo/:seasonId', component: JeuDuLogoComponent},
+
+      // Who Am I
+      { path: 'who-am-i/admin', component: WhoAmIAdminComponent },
+      { path: 'who-am-i/season/:seasonId', component: WhoAmIComponent },
 
       // Classements
       { path: 'ladder/:collectionId', component: LadderComponent }

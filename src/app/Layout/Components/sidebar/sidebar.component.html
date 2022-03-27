@@ -121,7 +121,7 @@
               <ngb-panel id="dashboardsMenu">
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
-                    <i class="vsm-icon pe-7s-search"></i>
+                    <i class="vsm-icon pe-7s-user"></i>
                     <span class="vsm-title">Qui suis-je ?</span>
                     <i class="vsm-arrow"></i>
                   </button>
@@ -129,8 +129,15 @@
                 <ng-template ngbPanelContent>
                   <div class="vsm-dropdown">
                     <div class="vsm-list">
-                      <div class="vsm-item">
-                        <span class="vsm-title">Saison 1</span>
+                      <div class="vsm-item" *ngFor="let season of whoAmISeasons">
+                        <a (click)="goToWhoAmISeason(season.id)" routerLinkActive="active-item" class="vsm-link">
+                          <span class="vsm-title">{{ season.name }}</span>
+                        </a>
+                      </div>
+                      <div class="vsm-item" *ngIf="player?.role === 'ADMIN' || player?.role === 'WHO_AM_I_ORGANIZER'">
+                        <a routerLink="/who-am-i/admin" routerLinkActive="active-item" class="vsm-link">
+                          <span class="vsm-title">Panel administrateur</span>
+                        </a>
                       </div>
                     </div>
                   </div>

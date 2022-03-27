@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { cpuUsage } from 'process';
 
 @Injectable({
   providedIn: 'root'
@@ -333,5 +334,71 @@ export class ApiService {
 
       return get;
     },
+  }
+
+  public whoAmIService = {
+    getAllWhoAmISeasons: () => {
+      const get = this.http.get(this.baseUrl + "who-am-i/seasons");
+
+      return get;
+    },
+
+    getWhoAmISeason: (id) => {
+      const get = this.http.get(this.baseUrl + "who-am-i/season", { params: { seasonId: id }});
+
+      return get;
+    },
+
+    getPlayerCountForSeason: (seasonId) => {
+      const get = this.http.get(this.baseUrl + "who-am-i/seasons/players/count", { params: { seasonId }});
+
+      return get;
+    },
+
+    addSeasonPlayer: (discordId, seasonId) => {
+      const post = this.http.post(this.baseUrl + "who-am-i/season/player/add", {}, { params: { discordId: discordId, seasonId: seasonId }});
+
+      return post;
+    },
+
+    getDailyLadder: (token: any, seasonId) => {
+      const params = {
+        token: token,
+        seasonId: seasonId
+      };
+      const get = this.http.get(this.baseUrl + 'who-am-i/daily', { params: params });
+
+      return get;
+    },
+
+    getWhoAmILadder: (seasonId) => {
+      const get = this.http.get(this.baseUrl + 'who-am-i/ladder', { params: { seasonId: seasonId }});
+
+      return get;
+    },
+
+    postNewDay: (token: any, league) => {
+      console.log(league);
+      
+      const body = {
+        whoAmIPlayerResourceList: league
+      };
+
+      const post = this.http.post(this.baseUrl + "who-am-i/day", body, { params: { token: token }});
+
+      return post;
+    },
+
+    createNewSeason: (seasonName, seasonDays) => {
+      const body = {
+        name: seasonName, 
+        totalDays: seasonDays, 
+        status: 'CREATED'
+      };
+
+      const post = this.http.post(this.baseUrl + "who-am-i/seasons/create", body);
+      
+      return post;
+    }
   }
 }
