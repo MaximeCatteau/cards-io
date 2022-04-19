@@ -32,7 +32,7 @@ export class JeuDuLogoComponent implements OnInit {
   league1Form: FormGroup = new FormGroup({});
   league2Form: FormGroup = new FormGroup({});
 
-  constructor(public api: ApiService, public modalService: NgbModal, private formBuilder: FormBuilder, public route: ActivatedRoute) {}
+  constructor(public api: ApiService, public modalService: NgbModal, private formBuilder: FormBuilder, public route: ActivatedRoute, public discordService: DiscordService) {}
 
 
   ngOnInit() {
@@ -60,6 +60,7 @@ export class JeuDuLogoComponent implements OnInit {
       });
 
       this.api.logoService.getLeague1Ladder(localStorage['token'], this.seasonId).subscribe((ladder) => {
+
         this.league1Ladder = ladder;
       });
   
