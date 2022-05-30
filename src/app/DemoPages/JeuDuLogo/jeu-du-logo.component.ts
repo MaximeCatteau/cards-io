@@ -32,7 +32,7 @@ export class JeuDuLogoComponent implements OnInit {
   league1Form: FormGroup = new FormGroup({});
   league2Form: FormGroup = new FormGroup({});
 
-  constructor(public api: ApiService, public modalService: NgbModal, private formBuilder: FormBuilder, public route: ActivatedRoute, public discordService: DiscordService) {}
+  constructor(public api: ApiService, public modalService: NgbModal, private formBuilder: FormBuilder, public route: ActivatedRoute) {}
 
 
   ngOnInit() {
