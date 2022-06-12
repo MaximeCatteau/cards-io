@@ -1,0 +1,333 @@
+
+<div class="card main-card mb-3 mr-2 ml-2">
+  <div class="card-body profile-infos">
+    <div class="row">
+      <img [src]='getInitialsUrl()'/>
+      <div class="row">
+        <div class="col-12">
+          <div class="name">{{ footballPlayer?.firstname}} {{ footballPlayer?.lastname }}</div>
+        </div>
+        <div class="col-12">
+          <div class="birth"><i>{{ footballPlayer?.birthDate }} ({{ footballPlayer?.age }} ans)</i></div>
+        </div>
+        <div class="col-12">
+          <div class="nationalities">
+            {{ displayNationalities() }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="post">
+            {{ stringifyPostAndPosition() }}
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto m-5 text-center level">Niveau {{ footballPlayer?.level }}</div>
+      </div>
+      <div class="row">
+        <div class="col-auto m-5 text-center xp">{{ footballPlayer?.experience }}xp</div>
+      </div>
+      <div class="row">
+        <div class="col-auto m-5 text-center points-to-set">{{ footballPlayer?.pointsToSet }} points à répartir</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card main-card mb-3 mr-2 ml-2">
+  <div class="card-header">
+    <div class="card-header-title font-size-lg font-weight-normal">
+      Caractère du joueur
+    </div>
+  </div>
+  <div class="card-body profile-infos">
+    <div class="table-responsive">
+      <table class="align-middle text-truncate mb-0 table table-borderless">
+        <tr>
+          <td>Ambition</td>
+          <td>{{ footballPlayer?.characterStatistics?.ambition }}</td>
+          <td>Polyvalence</td>
+          <td>{{ footballPlayer?.characterStatistics?.versatility }}</td>
+        </tr>
+        <tr>
+          <td>Fair-play</td>
+          <td>{{ footballPlayer?.characterStatistics?.fairPlay }}</td>
+          <td>Fidélité</td>
+          <td>{{ footballPlayer?.characterStatistics?.loyalty }}</td>
+        </tr>
+        <tr>
+          <td>Régularité</td>
+          <td>{{ footballPlayer?.characterStatistics?.regularity }}</td>
+          <td>Matchs importants</td>
+          <td>{{ footballPlayer?.characterStatistics?.importantGames }}</td>
+        </tr>
+        <tr>
+          <td>Polémique</td>
+          <td>{{ footballPlayer?.characterStatistics?.controversy }}</td>
+          <td>Gestion de la pression</td>
+          <td>{{ footballPlayer?.characterStatistics?.pressure }}</td>
+        </tr>
+        <tr>
+          <td>Professionalisme</td>
+          <td>{{ footballPlayer?.characterStatistics?.professionalism }}</td>
+          <td>Tempérament</td>
+          <td>{{ footballPlayer?.characterStatistics?.temperament }}</td>
+        </tr>
+        <tr>
+          <td>Adaptabilité</td>
+          <td>{{ footballPlayer?.characterStatistics?.adaptability }}</td>
+          <td>Violence</td>
+          <td>{{ footballPlayer?.characterStatistics?.violence }}</td>
+        </tr>
+        <tr>
+          <td>Tendance à se blesser</td>
+          <td>{{ footballPlayer?.characterStatistics?.fragility }}</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card main-card mb-3 mr-2 ml-2">
+  <div class="card-header">
+    <div class="card-header-title font-size-lg font-weight-normal">
+      Attributs physiques
+    </div>
+  </div>
+  <div class="card-body profile-infos">
+    <div class="table-responsive">
+      <table class="align-middle text-truncate mb-0 table table-borderless">
+        <tr>
+          <td>Accélération</td>
+          <td>{{ footballPlayer?.physicalAttributes?.acceleration }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('acceleration')" *ngIf="canImprove('acceleration')">+1</button></td>
+          <td>Agilité</td>
+          <td>{{ footballPlayer?.physicalAttributes?.agility }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('agility')" *ngIf="canImprove('agility')">+1</button></td>
+        </tr>
+        <tr>
+          <td>Détente verticale</td>
+          <td>{{ footballPlayer?.physicalAttributes?.verticalExtension }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('verticalExtension')" *ngIf="canImprove('verticalExtension')">+1</button></td>
+          <td>Endurance</td>
+          <td>{{ footballPlayer?.physicalAttributes?.endurance }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('endurance')" *ngIf="canImprove('endurance')">+1</button></td>
+        </tr>
+        <tr>
+          <td>Équilibre</td>
+          <td>{{ footballPlayer?.physicalAttributes?.equilibrium }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('equilibrium')" *ngIf="canImprove('equilibrium')">+1</button></td>
+          <td>Puissance</td>
+          <td>{{ footballPlayer?.physicalAttributes?.power }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('power')" *ngIf="canImprove('power')">+1</button></td>
+        </tr>
+        <tr>
+          <td>Qualités physiques naturelles</td>
+          <td>{{ footballPlayer?.physicalAttributes?.naturalPhysicAbilities }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('naturalPhysicAbilities')" *ngIf="canImprove('naturalPhysicAbilities')">+1</button></td>
+          <td>Vitesse</td>
+          <td>{{ footballPlayer?.physicalAttributes?.speed }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('speed')" *ngIf="canImprove('speed')">+1</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card main-card mb-3 mr-2 ml-2">
+  <div class="card-header">
+    <div class="card-header-title font-size-lg font-weight-normal">
+      Attributs mentaux
+    </div>
+  </div>
+  <div class="card-body profile-infos">
+    <div class="table-responsive">
+      <table class="align-middle text-truncate mb-0 table table-borderless">
+        <tr>
+          <td>Agressivité</td>
+          <td>{{ footballPlayer?.mentalAttributes?.aggressiveness }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('aggressiveness')" *ngIf="canImprove('aggressiveness')">+1</button></td>
+          <td>Anticipation</td>
+          <td>{{ footballPlayer?.mentalAttributes?.anticipation }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('anticipation')" *ngIf="canImprove('anticipation')">+1</button></td>
+        </tr>
+        <tr>
+          <td>Appels de balle</td>
+          <td>{{ footballPlayer?.mentalAttributes?.ballCalls }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('ballCalls')" *ngIf="canImprove('ballCalls')">+1</button></td>
+          <td>Concentration</td>
+          <td>{{ footballPlayer?.mentalAttributes?.concentration }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('concentration')" *ngIf="canImprove('concentration')">+1</button></td>
+        </tr>
+        <tr>
+          <td>Courage</td>
+          <td>{{ footballPlayer?.mentalAttributes?.bravery }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('bravery')" *ngIf="canImprove('bravery')">+1</button></td>
+          <td>Décisions</td>
+          <td>{{ footballPlayer?.mentalAttributes?.decisionMaking }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('decisionMaking')" *ngIf="canImprove('decisionMaking')">+1</button></td>
+        </tr>
+        <tr>
+          <td>Détermination</td>
+          <td>{{ footballPlayer?.mentalAttributes?.determination }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('determination')" *ngIf="canImprove('determination')">+1</button></td>
+          <td>Inspiration</td>
+          <td>{{ footballPlayer?.mentalAttributes?.inspiration }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('inspiration')" *ngIf="canImprove('inspiration')">+1</button></td>
+        </tr>
+        <tr>
+          <td>Jeu collectif</td>
+          <td>{{ footballPlayer?.mentalAttributes?.collectiveGame }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('collectiveGame')" *ngIf="canImprove('collectiveGame')">+1</button></td>
+          <td>Leadership</td>
+          <td>{{ footballPlayer?.mentalAttributes?.leadership }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('leadership')" *ngIf="canImprove('leadership')">+1</button></td>
+        </tr>
+        <tr>
+          <td>Placement</td>
+          <td>{{ footballPlayer?.mentalAttributes?.placement }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('placement')" *ngIf="canImprove('placement')">+1</button></td>
+          <td>Sang-froid</td>
+          <td>{{ footballPlayer?.mentalAttributes?.coldBlood }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('coldBlood')" *ngIf="canImprove('coldBlood')">+1</button></td>
+        </tr>
+        <tr>
+          <td>Vision du jeu</td>
+          <td>{{ footballPlayer?.mentalAttributes?.gameView }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('gameView')" *ngIf="canImprove('gameView')">+1</button></td>
+          <td>Volume de jeu</td>
+          <td>{{ footballPlayer?.mentalAttributes?.gameVolume }}</td>
+          <td><button class="btn-shadow btn btn-success" (click)="improve('gameVolume')" *ngIf="canImprove('gameVolume')">+1</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card main-card mb-3 mr-2 ml-2">
+  <div class="card-header">
+    <div class="card-header-title font-size-lg font-weight-normal">
+      Attributs techniques
+    </div>
+  </div>
+  <div class="card-body profile-infos">
+    <table *ngIf="!isGoalKeeper()" class="align-middle text-truncate mb-0 table table-borderless">
+      <tr>
+        <td>Centres</td>
+        <td>{{ footballPlayer?.technicalAttributes?.centers }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('centers')" *ngIf="canImprove('centers')">+1</button></td>
+        <td>Contrôle de balle</td>
+        <td>{{ footballPlayer?.technicalAttributes?.ballControl }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('ballControl')" *ngIf="canImprove('ballControl')">+1</button></td>
+      </tr>
+      <tr>
+        <td>Corners</td>
+        <td>{{ footballPlayer?.technicalAttributes?.corners }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('corners')" *ngIf="canImprove('corners')">+1</button></td>
+        <td>Coups francs</td>
+        <td>{{ footballPlayer?.technicalAttributes?.freeKicks }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('freeKicks')" *ngIf="canImprove('freeKicks')">+1</button></td>
+      </tr>
+      <tr>
+        <td>Dribbles</td>
+        <td>{{ footballPlayer?.technicalAttributes?.dribbles }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('dribbles')" *ngIf="canImprove('dribbles')">+1</button></td>
+        <td>Finition</td>
+        <td>{{ footballPlayer?.technicalAttributes?.finition }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('finition')" *ngIf="canImprove('finition')">+1</button></td>
+      </tr>
+      <tr>
+        <td>Jeu de tête</td>
+        <td>{{ footballPlayer?.technicalAttributes?.headers }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('headers')" *ngIf="canImprove('headers')">+1</button></td>
+        <td>Marquage</td>
+        <td>{{ footballPlayer?.technicalAttributes?.marking }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('marking')" *ngIf="canImprove('marking')">+1</button></td>
+      </tr>
+      <tr>
+        <td>Passes</td>
+        <td>{{ footballPlayer?.technicalAttributes?.passes }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('passes')" *ngIf="canImprove('passes')">+1</button></td>
+        <td>Penalty</td>
+        <td>{{ footballPlayer?.technicalAttributes?.penalty }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('penalty')" *ngIf="canImprove('penalty')">+1</button></td>
+      </tr>
+      <tr>
+        <td>Tacles</td>
+        <td>{{ footballPlayer?.technicalAttributes?.tackles }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('tackles')" *ngIf="canImprove('tackles')">+1</button></td>
+        <td>Technique</td>
+        <td>{{ footballPlayer?.technicalAttributes?.technique }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('technique')" *ngIf="canImprove('technique')">+1</button></td>
+      </tr>
+      <tr>
+        <td>Tirs de loin</td>
+        <td>{{ footballPlayer?.technicalAttributes?.longShots }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('longShots')" *ngIf="canImprove('longShots')">+1</button></td>
+        <td>Touches longues</td>
+        <td>{{ footballPlayer?.technicalAttributes?.longThrows }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('longThrows')" *ngIf="canImprove('longThrows')">+1</button></td>
+      </tr>
+    </table>
+    <table *ngIf="isGoalKeeper()" class="align-middle text-truncate mb-0 table table-borderless">
+      <tr>
+        <td>Communication</td>
+        <td>{{ footballPlayer?.technicalAttributes?.communication }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('communication')" *ngIf="canImprove('communication')">+1</button></td>
+        <td>Contrôle de balle</td>
+        <td>{{ footballPlayer?.technicalAttributes?.ballControl }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('ballControl')" *ngIf="canImprove('ballControl')">+1</button></td>
+      </tr>
+      <tr>
+        <td>Prises de balle</td>
+        <td>{{ footballPlayer?.technicalAttributes?.ballCatches }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('ballCatches')" *ngIf="canImprove('ballCatches')">+1</button></td>
+        <td>Réflexes</td>
+        <td>{{ footballPlayer?.technicalAttributes?.reflexes }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('reflexes')" *ngIf="canImprove('reflexes')">+1</button></td>
+      </tr>
+      <tr>
+        <td>Dégagements au poing</td>
+        <td>{{ footballPlayer?.technicalAttributes?.fistClearances }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('fistClearances')" *ngIf="canImprove('fistClearances')">+1</button></td>
+        <td>Dégagements</td>
+        <td>{{ footballPlayer?.technicalAttributes?.clearances }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('clearances')" *ngIf="canImprove('clearances')">+1</button></td>
+      </tr>
+      <tr>
+        <td>Relances à la main</td>
+        <td>{{ footballPlayer?.technicalAttributes?.handThrows }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('handThrows')" *ngIf="canImprove('handThrows')">+1</button></td>
+        <td>Sorties dans la surface</td>
+        <td>{{ footballPlayer?.technicalAttributes?.inboxExits }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('inboxExits')" *ngIf="canImprove('inboxExits')">+1</button></td>
+      </tr>
+      <tr>
+        <td>Détente</td>
+        <td>{{ footballPlayer?.technicalAttributes?.extension }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('extension')" *ngIf="canImprove('extension')">+1</button></td>
+        <td>Excentricité</td>
+        <td>{{ footballPlayer?.technicalAttributes?.excentricity }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('excentricity')" *ngIf="canImprove('excentricity')">+1</button></td>
+      </tr>
+      <tr>
+        <td>Sorties dans les pieds</td>
+        <td>{{ footballPlayer?.technicalAttributes?.inFeetExits }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('inFeetExits')" *ngIf="canImprove('inFeetExits')">+1</button></td>
+        <td>Un contre un</td>
+        <td>{{ footballPlayer?.technicalAttributes?.oneVersusOne }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('oneVersusOne')" *ngIf="canImprove('oneVersusOne')">+1</button></td>
+      </tr>
+      <tr>
+        <td>Passes</td>
+        <td>{{ footballPlayer?.technicalAttributes?.passes }}</td>
+        <td><button class="btn-shadow btn btn-success" (click)="improve('passes')" *ngIf="canImprove('passes')">+1</button></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+</div>

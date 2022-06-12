@@ -55,6 +55,9 @@ import { JeuDuLogoComponent } from './DemoPages/JeuDuLogo/jeu-du-logo.component'
 import { LadderComponent } from './DemoPages/Ladder/ladder.component';
 import { WhoAmIAdminComponent } from './DemoPages/WhoAmI/Admin/who-am-i-admin.component';
 import { WhoAmIComponent } from './DemoPages/WhoAmI/who-am-i.component';
+import { ClubPageComponent } from './DemoPages/RPBinouze/club-page.component';
+import { RpAdminComponent } from './DemoPages/RPBinouze/Admin/rp-admin.component';
+import { FootballPlayerComponent } from './DemoPages/RPBinouze/FootballPlayer/football-player.component';
 
 const routes: Routes = [
   {
@@ -133,8 +136,12 @@ const routes: Routes = [
       { path: 'who-am-i/season/:seasonId', component: WhoAmIComponent },
 
       // Classements
-      { path: 'ladder/:collectionId', component: LadderComponent }
+      { path: 'ladder/:collectionId', component: LadderComponent },
 
+      // RP Binouze
+      { path: 'rpbinouze/clubs/:clubId', component: ClubPageComponent},
+      { path: 'rpbinouze/admin', component: RpAdminComponent},
+      { path: 'rpbinouze/player/:footballPlayerId', component: FootballPlayerComponent}
     ]
 
   },

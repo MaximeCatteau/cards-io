@@ -1,0 +1,31 @@
+
+<div class="card rp-player-card main-card mb-3 mr-2 ml-2">
+  <div class="card-body">
+    <div class="row circle-img">
+      <img [src]='getInitialsUrl()'/>
+    </div>
+    <div class="row">
+      <div class="name" (click)="goToFootballPlayerProfile(player.id)">
+        {{ player.firstname }} {{ player.lastname }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="age">
+        {{ player.age }} ans
+      </div>
+    </div>
+    <div class="row">
+      <div class="nationalities main-nationality">
+        {{ player.mainNationalityCode }} {{ player.mainNationality }}
+      </div>
+      <div class="nationalities" *ngIf="player.secondNationality">
+        {{ player.secondNationalityCode}} {{ player.secondNationality }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="post">
+        {{ stringifyPostAndPosition() }}
+      </div>
+    </div>
+  </div>
+</div>

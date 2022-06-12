@@ -1,0 +1,36 @@
+<div class="main-card mb-3 card">
+  <div class="card-header">
+    <div class="card-header-title font-size-lg font-weight-normal">Tous les joueurs</div>
+  </div>
+  <div class="table-responsive">
+    <table class="align-middle text-truncate mb-0 table table-borderless">
+      <thead>
+      <tr>
+        <th class="text-center">ID Joueur</th>
+        <th class="text-center">Prénom</th>
+        <th class="text-center">Nom</th>
+        <th class="text-center">Propriétaire</th>
+        <th class="text-center">Niveau</th>
+        <th class="text-center">XP Totale</th>
+        <th class="text-center">Envoyer un message test</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let p of players">
+        <td class="text-center">{{ p.id }}</td>
+        <td class="text-center">{{ p.firstname }}</td>
+        <td class="text-center">{{ p.lastname }}</td>
+        <td class="text-center">{{ p.owner }}</td>
+        <td class="text-center">{{ p.level }}</td>
+        <td class="text-center">{{ p.xp }}</td>
+        <td class="text-center">
+          <div role="group" class="btn-group-sm btn-group">
+            <button class="btn-shadow btn btn-success" (click)="sendTestMessage()">Message test</button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

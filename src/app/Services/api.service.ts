@@ -400,4 +400,117 @@ export class ApiService {
       return post;
     }
   }
+
+  public rpbinouzeService = {
+    getPlayersOfClub: (clubName) => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/players/club', { params: { clubName: clubName }});
+
+      return get;
+    },
+
+    getPlayersForAdmin: () => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/admin/players');
+
+      return get;
+    },
+
+    getFootballPlayerProfileById: (footballPlayerId) => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/player', { params: { id: footballPlayerId }});
+      
+      return get;
+    },
+
+    updatePhysicalAbility: (updateResource) => {
+      const body = {
+        footballPlayerId: updateResource.footballPlayerId, 
+        attributeUpdated: updateResource.attributeUpdated,
+        acceleration: updateResource.acceleration,
+        agility: updateResource.agility,
+        endurance: updateResource.endurance,
+        equilibrium: updateResource.equilibrium,
+        naturalPhysicAbilities: updateResource.naturalPhysicAbilities,
+        power: updateResource.power,
+        speed: updateResource.speed,
+        verticalExtension: updateResource.verticalExtension
+      };
+      
+      const post = this.http.post(this.baseUrl + "rpbinouze/attributes/physical/update", body);
+
+      return post;
+    },
+
+    updateMentalAbility: (updateResource) => {
+      const body = {
+        footballPlayerId: updateResource.footballPlayerId, 
+        attributeUpdated: updateResource.attributeUpdated,
+        aggressiveness: updateResource.aggressiveness,
+        ballCalls: updateResource.ballCalls,
+        bravery: updateResource.bravery,
+        determination: updateResource.determination,
+        collectiveGame: updateResource.collectiveGame,
+        placement: updateResource.placement,
+        gameView: updateResource.gameView,
+        anticipation: updateResource.anticipation,
+        concentration: updateResource.concentration,
+        decisionMaking: updateResource.decisionMaking,
+        inspiration: updateResource.inspiration,
+        leadership: updateResource.leadership,
+        coldBlood: updateResource.coldBlood,
+        gameVolume: updateResource.gameVolume
+      };
+      
+      const post = this.http.post(this.baseUrl + "rpbinouze/attributes/mental/update", body);
+
+      return post;
+    },
+
+    updateFieldPlayerTechnicalAbility: (updateResource) => {
+      const body = {
+        footballPlayerId: updateResource.footballPlayerId, 
+        attributeUpdated: updateResource.attributeUpdated,
+        centers: updateResource.centers,
+        corners: updateResource.corners,
+        dribbles: updateResource.dribbles,
+        headers: updateResource.headers,
+        passes: updateResource.passes,
+        tackles: updateResource.tackles,
+        longShots: updateResource.longShots,
+        ballControl: updateResource.ballControl,
+        freeKicks: updateResource.freeKicks,
+        finition: updateResource.finition,
+        marking: updateResource.marking,
+        penalty: updateResource.penalty,
+        technique: updateResource.technique,
+        longThrows: updateResource.longThrows
+      };
+      
+      const post = this.http.post(this.baseUrl + "rpbinouze/attributes/technical/fieldplayer/update", body);
+
+      return post;
+    },
+
+    updateGoalKeeperTechnicalAbility: (updateResource) => {
+      const body = {
+        footballPlayerId: updateResource.footballPlayerId, 
+        attributeUpdated: updateResource.attributeUpdated,
+        passes: updateResource.passes,
+        ballControl: updateResource.ballControl,
+        communication: updateResource.communication,
+        ballCatches: updateResource.ballCatches,
+        fistClearances: updateResource.fistClearances,
+        handThrows: updateResource.handThrows,
+        extension: updateResource.extension,
+        inFeetExits: updateResource.inFeetExits,
+        reflexes: updateResource.reflexes,
+        clearances: updateResource.clearances,
+        inboxExits: updateResource.inboxExits,
+        excentricity: updateResource.excentricity,
+        oneVersusOne: updateResource.oneVersusOne
+      };
+      
+      const post = this.http.post(this.baseUrl + "rpbinouze/attributes/technical/goalkeeper/update", body);
+
+      return post;
+    },
+  }
 }

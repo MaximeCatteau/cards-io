@@ -73,13 +73,13 @@
                 <span class="vsm-title">Boutique</span>
               </a>
             </div>
-            <!-- Jeu du Logo -->
+            <!-- Jeu du Logo - Foot FR -->
             <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
               <ngb-panel id="dashboardsMenu">
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon pe-7s-search"></i>
-                    <span class="vsm-title">Jeu du Logo</span>
+                    <span class="vsm-title">Jeu du Logo - Foot FR</span>
                     <i class="vsm-arrow"></i>
                   </button>
                 </ng-template>
@@ -114,6 +114,29 @@
                       <div class="vsm-item">
                         <a routerLink="/jeu-du-logo/6" routerLinkActive="active-item" class="vsm-link">
                           <span class="vsm-title">Saison 11</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+             <!-- Jeu du Logo - [ABDL]-->
+             <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
+              <ngb-panel id="dashboardsMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon pe-7s-search"></i>
+                    <span class="vsm-title">Jeu du Logo - ABDL</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLink="/jeu-du-logo/7" routerLinkActive="active-item" class="vsm-link">
+                          <span class="vsm-title">Saison 2</span>
                         </a>
                       </div>
                     </div>
@@ -170,6 +193,34 @@
                       <div class="vsm-item" *ngFor="let col of collectionsForLadder">
                         <a routerLink="/ladder/{{col.id}}" routerLinkActive="active-item" class="vsm-link">
                           <span class="vsm-title">{{ col.name }}</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+            <!-- RP Binouze -->
+            <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" *ngIf="player?.role === 'ADMIN'">
+              <ngb-panel id="dashboardsMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon pe-7s-moon"></i>
+                    <span class="vsm-title">RP Binouze</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLink="/rpbinouze/clubs/1" routerLinkActive="active-item" class="vsm-link">
+                          <span class="vsm-title">FC Binouze</span>
+                        </a>
+                      </div>
+                      <div class="vsm-item" *ngIf="player?.role === 'ADMIN'">
+                        <a routerLink="/rpbinouze/admin" routerLinkActive="active-item" class="vsm-link">
+                          <span class="vsm-title">Administrateur</span>
                         </a>
                       </div>
                     </div>

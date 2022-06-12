@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card main-card mb-3">
+      <div class="card-header">
+        Le club
+      </div>
+      <div class="card-body">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card main-card mb-3">
+      <div class="card-header">
+        L'équipe
+      </div>
+      <div class="card-body">
+        <h4>Gardiens</h4>
+        <div class="row"> 
+          <div *ngFor="let g of goalkeepers;">
+            <app-rp-player-card [player]="g"></app-rp-player-card>
+          </div>
+        </div>
+        <h4>Défenseurs</h4>
+        <div class="row">
+          <div *ngFor="let d of defenders;">
+            <app-rp-player-card [player]="d"></app-rp-player-card>
+          </div>
+        </div>
+        <h4>Milieux</h4>
+        <div class="row">
+          <div *ngFor="let m of midfielders;">
+            <app-rp-player-card class="col-3" [player]="m"></app-rp-player-card>
+          </div>
+        </div>
+        <h4>Attaquants</h4>
+        <div class="row">
+          <div *ngFor="let f of forwards;">
+            <app-rp-player-card [player]="f"></app-rp-player-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
