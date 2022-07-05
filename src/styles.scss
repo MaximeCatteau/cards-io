@@ -67,6 +67,18 @@
   }
 }
 
+.match_list {
+  text-align: center;
+  .match_resume {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    .match_logo {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}
+
 .profile-infos {
   .name {
     font-size: 25px;

@@ -15,6 +15,44 @@
   <div class="col-12">
     <div class="card main-card mb-3">
       <div class="card-header">
+        Les derniers matchs
+        <button type="button" class="btn-shadow btn btn-success" (click)="openCreateMatch(content)">
+          <fa class="mr-2" name="plus"></fa>
+          Ajouter un match
+        </button>
+        <!-- MODAL DE CREATION -->
+        <div class="card-body">
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Ajouter une match</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-error" (click)="c('Close click')">Annuler</button>
+              <button type="button" class="btn btn-success" (click)="validateForm()">Ajouter</button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div class="card-body match_list">
+        <div class="match_resume" *ngFor="let m of matchs;">
+          <img class="match_logo" src="{{ m.home?.logo }}">
+          {{ m.home?.clubName }} {{ m.scoreHome }} - {{ m.scoreAway }} {{ m.away?.clubName }}
+          <img class="match_logo" src="{{ m.away?.logo }}">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card main-card mb-3">
+      <div class="card-header">
         L'équipe
       </div>
       <div class="card-body">

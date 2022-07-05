@@ -512,5 +512,11 @@ export class ApiService {
 
       return post;
     },
+
+    getMatchsForClub: (clubId) => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/matchs', { params: { clubId: clubId }});
+
+      return get;
+    }
   }
 }
