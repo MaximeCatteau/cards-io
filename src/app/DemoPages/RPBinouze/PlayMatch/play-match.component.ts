@@ -38,7 +38,7 @@ export class PlayMatchComponent implements OnInit {
         this.api.rpbinouzeService.getPlayersOfClub("FC Binouze").subscribe((players: []) => {
           this.players = players;
 
-          for (let i = 0; i < 3; i++) {
+          for (let i = 0; i < players.length; i++) {
             this.matchReport.push(
               this.fb.group({
                 playerId: new FormControl(),
@@ -66,7 +66,6 @@ export class PlayMatchComponent implements OnInit {
 
   buildPlayMatchResource(homeScore, awayScore, matchReport) {
     let playMatchResource = {};
-    console.log(matchReport);
 
     playMatchResource['id'] = this.match.id;
     playMatchResource['scoreHome'] = homeScore;
