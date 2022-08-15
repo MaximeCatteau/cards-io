@@ -1,4 +1,6 @@
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import {Component, OnInit} from '@angular/core';
+import { moveEmbeddedView } from '@angular/core/src/view';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/Services/api.service';
@@ -14,7 +16,11 @@ export class ClubPageComponent implements OnInit {
   defenders: [];
   midfielders: [];
   forwards: [];
-  matchs: [];
+  matchs: any[];
+
+  opponents: [];
+  competitions: [];
+  selectedPlace: string = 'HOME';
 
   constructor(public api: ApiService, public router: Router, public route: ActivatedRoute, public modalService: NgbModal) {
 
@@ -32,6 +38,14 @@ export class ClubPageComponent implements OnInit {
       this.players = p;
       this.parseByPost();
       this.sortByNumber();
+    });
+
+    this.api.rpbinouzeService.getOtherClubs().subscribe((c: []) => {
+      this.opponents = c;
+    });
+
+    this.api.rpbinouzeService.getCompetitions().subscribe((c: []) => {
+      this.competitions = c;
     });
   }
 
@@ -51,5 +65,44 @@ export class ClubPageComponent implements OnInit {
 
   openCreateMatch(content) {
     this.modalService.open(content);
+  }
+
+  setPlace(place) {
+    this.selectedPlace = place;
+  }
+
+  isFinished(match) {
+    return match.status == 'FINISHED';
+  }
+
+  stringifyDate(date) {
+    const stringDate = new Date(date);
+
+    return stringDate;
+  }
+
+  validateForm(competition, opponent, date) {
+    let matchResource = {
+      date: date,
+      competition: competition
+    };
+
+    if (this.selectedPlace == 'HOME') {
+      matchResource['away'] = opponent;
+      matchResource['home'] = 'FC Binouze';
+    } else if (this.selectedPlace == 'AWAY') {
+      matchResource['home'] = opponent;
+      matchResource['away'] = 'FC Binouze';
+    }
+
+    this.api.rpbinouzeService.createNewMatch(matchResource).subscribe((match: any) => {
+      this.matchs.push(match);
+    });
+
+    this.modalService.dismissAll();
+  }
+
+  goToPlayMatch(matchId) {
+    this.router.navigate(['/rpbinouze/match/' + matchId]);
   }
 }

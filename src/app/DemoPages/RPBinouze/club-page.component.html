@@ -15,7 +15,7 @@
   <div class="col-12">
     <div class="card main-card mb-3">
       <div class="card-header">
-        Les derniers matchs
+        Matchs
         <button type="button" class="btn-shadow btn btn-success" (click)="openCreateMatch(content)">
           <fa class="mr-2" name="plus"></fa>
           Ajouter un match
@@ -30,19 +30,64 @@
               </button>
             </div>
             <div class="modal-body">
+              <div class="row">
+                <td class="text-center">
+                  Lieu : 
+                  <div role="group" class="btn-group-sm btn-group">
+                    <button class="btn-shadow btn btn-primary" (click)="setPlace('HOME')">Domicile</button>
+                    <button class="btn-shadow btn btn-primary" (click)="setPlace('AWAY')">Extérieur</button>
+                    <button class="btn-shadow btn btn-primary" (click)="setPlace('NEUTRAL')">Terrain neutre</button>
+                  </div>
+                </td>
+              </div>
+              <div class="row">
+                <td class="text-center">
+                  Adversaire : 
+                  <select id="opponent" #opponent name="opponent">
+                    <option *ngFor="let o of opponents;">
+                      {{ o.name }}
+                    </option>
+                  </select>
+                </td>
+              </div>
+              <div class="row">
+                <td class="text-center">
+                  Compétition : 
+                  <select id="competition" #competition name="competition">
+                    <option *ngFor="let c of competitions;">
+                      {{ c.name }}
+                    </option>
+                  </select>
+                </td>
+              </div>
+              <div class="row">
+                <td  class="text-center">
+                  Date : 
+                  <input type="text" id="date" #date name="date">
+                </td>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-error" (click)="c('Close click')">Annuler</button>
-              <button type="button" class="btn btn-success" (click)="validateForm()">Ajouter</button>
+              <button type="button" class="btn btn-success" (click)="validateForm(competition.value, opponent.value, date.value)">Ajouter</button>
             </div>
           </ng-template>
         </div>
       </div>
       <div class="card-body match_list">
-        <div class="match_resume" *ngFor="let m of matchs;">
-          <img class="match_logo" src="{{ m.home?.logo }}">
-          {{ m.home?.clubName }} {{ m.scoreHome }} - {{ m.scoreAway }} {{ m.away?.clubName }}
-          <img class="match_logo" src="{{ m.away?.logo }}">
+        <div class="row center match_resume" *ngFor="let m of matchs;">
+          <div class="col-11 text-center">
+            <img class="match_logo" src="{{ m.home?.logo }}">
+            {{ m.home?.clubName }} {{ m.scoreHome }} - {{ m.scoreAway }} {{ m.away?.clubName }}
+            <img class="match_logo" src="{{ m.away?.logo }}">
+            <div *ngIf="isFinished(m)"><i>Terminé</i></div>
+            <div *ngIf="!isFinished(m)"><i>Programmé le {{ stringifyDate(m.date) | date:'fullDate' }}</i></div>
+          </div>
+          <div class="col-1" *ngIf="!isFinished(m)">
+            <button type="button" class="btn-shadow btn btn-success" (click)="goToPlayMatch(m.id)">
+              Jouer le match
+            </button>
+          </div>
         </div>
       </div>
     </div>

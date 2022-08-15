@@ -58,6 +58,7 @@ import { WhoAmIComponent } from './DemoPages/WhoAmI/who-am-i.component';
 import { ClubPageComponent } from './DemoPages/RPBinouze/club-page.component';
 import { RpAdminComponent } from './DemoPages/RPBinouze/Admin/rp-admin.component';
 import { FootballPlayerComponent } from './DemoPages/RPBinouze/FootballPlayer/football-player.component';
+import { PlayMatchComponent } from './DemoPages/RPBinouze/PlayMatch/play-match.component';
 
 const routes: Routes = [
   {
@@ -141,7 +142,8 @@ const routes: Routes = [
       // RP Binouze
       { path: 'rpbinouze/clubs/:clubId', component: ClubPageComponent},
       { path: 'rpbinouze/admin', component: RpAdminComponent},
-      { path: 'rpbinouze/player/:footballPlayerId', component: FootballPlayerComponent}
+      { path: 'rpbinouze/player/:footballPlayerId', component: FootballPlayerComponent},
+      { path: 'rpbinouze/match/:matchId', component: PlayMatchComponent}
     ]
 
   },

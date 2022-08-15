@@ -70,8 +70,6 @@ export class RPPlayerCardComponent implements OnInit {
   }
 
   goToFootballPlayerProfile(footballPlayerId: string) {
-    console.log(footballPlayerId);
-    
     this.router.navigate(['/rpbinouze/player/' + footballPlayerId]);
   }
 }

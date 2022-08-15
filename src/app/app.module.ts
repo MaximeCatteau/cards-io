@@ -86,7 +86,7 @@ import { ArchitectUIState, rootReducer } from './ThemeOptions/store';
 import { ConfigActions } from './ThemeOptions/store/config.actions';
 import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -111,6 +111,10 @@ import { ClubPageComponent } from './DemoPages/RPBinouze/club-page.component';
 import { RPPlayerCardComponent } from './DemoPages/RPBinouze/RPPlayerCard/rp-player-card.component';
 import { RpAdminComponent } from './DemoPages/RPBinouze/Admin/rp-admin.component';
 import { FootballPlayerComponent } from './DemoPages/RPBinouze/FootballPlayer/football-player.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { PlayMatchComponent } from './DemoPages/RPBinouze/PlayMatch/play-match.component';
+registerLocaleData(localeFr);
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -220,7 +224,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ClubPageComponent,
     RPPlayerCardComponent,
     RpAdminComponent,
-    FootballPlayerComponent
+    FootballPlayerComponent,
+    PlayMatchComponent
   ],
   imports: [
     BrowserModule,
@@ -251,6 +256,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       useValue:
       DEFAULT_PERFECT_SCROLLBAR_CONFIG,
       // DEFAULT_DROPZONE_CONFIG,
+    },
+    {
+      provide: LOCALE_ID, useValue: 'fr-FR'
     },
     ConfigActions,
   ],

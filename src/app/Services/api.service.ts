@@ -517,6 +517,53 @@ export class ApiService {
       const get = this.http.get(this.baseUrl + 'rpbinouze/matchs', { params: { clubId: clubId }});
 
       return get;
+    },
+
+    getOtherClubs: () => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/clubs/allBut', { });
+
+      return get;
+    },
+
+    getCompetitions: () => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/competitions', { });
+
+      return get;
+    },
+
+    createNewMatch: (createMatchResource) => {
+      const body = {
+        home: createMatchResource.home,
+        away: createMatchResource.away,
+        date: createMatchResource.date
+      };
+
+      const post = this.http.post(this.baseUrl + 'rpbinouze/match/create', body);
+
+      return post;
+    },
+
+    getMatch: (matchId) => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/match', { params: { matchId: matchId }});
+
+      return get;
+    },
+
+    playMatch: (playMatchResource) => {
+      const body = {
+        id: playMatchResource.id,
+        scoreHome: playMatchResource.scoreHome,
+        scoreAway: playMatchResource.scoreAway,
+        issue: playMatchResource.issue,
+        strikers: playMatchResource.strikers,
+        passers: playMatchResource.passers,
+        manOfTheMatch: playMatchResource.manOfTheMatch,
+        notes: playMatchResource.notes
+      };
+
+      const post = this.http.post(this.baseUrl + 'rpbinouze/match/play', body);
+
+      return post;
     }
   }
 }
