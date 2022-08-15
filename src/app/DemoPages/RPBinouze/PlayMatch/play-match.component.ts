@@ -154,10 +154,12 @@ export class PlayMatchComponent implements OnInit {
     let notes = [];
 
     matchReport.forEach(report => {
-      notes.push({
-        footballPlayerId: report.playerId,
-        matchNote: report.note
-      });
+      if (report.note) {
+        notes.push({
+          footballPlayerId: report.playerId,
+          matchNote: report.note
+        });
+      }
     });
 
     return notes;
