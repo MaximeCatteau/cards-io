@@ -135,7 +135,7 @@ export class PlayMatchComponent implements OnInit {
 
     console.log(line);
 
-    if (line) {
+    if (line && line.length > 0) {
       const player = this.players.find(p => p.id == line[0].playerId);
     
       const manOfTheMatch = {
