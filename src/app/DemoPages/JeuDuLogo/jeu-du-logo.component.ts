@@ -190,7 +190,7 @@ export class JeuDuLogoComponent implements OnInit {
   }
 
   validateForm(){
-    this.api.logoService.postNewDay(localStorage['token'], this.f1.players.value, this.f2.players.value).subscribe((logoDay) => {
+    this.api.logoService.postNewDay(localStorage['token'], this.seasonId, this.f1.players.value, this.f2.players.value).subscribe((logoDay) => {
       this.modalService.dismissAll();
     });
   }

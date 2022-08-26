@@ -310,8 +310,9 @@ export class ApiService {
       return get;
     },
 
-    postNewDay: (token: any, league1: any, league2: any) => {
+    postNewDay: (token: any, seasonId: any, league1: any, league2: any) => {
       const body = {
+        seasonId: seasonId,
         league1: league1,
         league2: league2
       }
