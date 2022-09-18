@@ -526,6 +526,12 @@ export class ApiService {
       return get;
     },
 
+    getAllClubs: () => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/clubs/all', { });
+
+      return get;
+    },
+
     getCompetitions: () => {
       const get = this.http.get(this.baseUrl + 'rpbinouze/competitions', { });
 
@@ -565,6 +571,54 @@ export class ApiService {
       const post = this.http.post(this.baseUrl + 'rpbinouze/match/play', body);
 
       return post;
+    },
+    
+    scoreFCBinouze: (scorerId, passerId, minute) => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/matchdeck/binouzeScore', { params: { scorerId: scorerId, passerId: passerId, minute: minute }});
+
+      return get;
+    },
+
+    scoreOpponent: (opponentId, scorerId, passerId, minute) => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/matchdeck/opponentScore', { params: { opponentId: opponentId, scorer: scorerId, passer: passerId, minute: minute }});
+
+      return get;
+    },
+
+    beginMatch: (homeId, awayId, competitionId, stadium) => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/matchdeck/beginMatch', { params: { homeId: homeId, awayId: awayId, competitionId: competitionId, stadium: stadium }});
+
+      return get;
+    },
+
+    endMatch: (homeId, awayId, scoreHome, scoreAway, competitionId) => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/matchdeck/endMatch', { params: { homeId: homeId, awayId: awayId, scoreHome: scoreHome, scoreAway: scoreAway, competitionId: competitionId }});
+
+      return get;
+    },
+
+    yellowCardBinouze: (playerId, minute) => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/matchdeck/yellowCardBinouze', { params: { playerId: playerId, minute: minute }});
+
+      return get;
+    },
+
+    yellowCardOpponent: (clubId, playerName, minute) => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/matchdeck/yellowCardOpponent', { params: { clubId: clubId, playerName: playerName, minute: minute }});
+
+      return get;
+    },
+
+    substituteFCBinouze: (playerOutId, playerInId, minute) => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/matchdeck/subBinouze', { params: { playerOutId: playerOutId, playerInId: playerInId, minute: minute }});
+
+      return get;
+    },
+
+    substituteOpponent: (clubId, playerOut, playerIn, minute) => {
+      const get = this.http.get(this.baseUrl + 'rpbinouze/matchdeck/subOpponent', { params: { clubId: clubId, playerOut: playerOut, playerIn: playerIn, minute: minute }});
+
+      return get;
     }
   }
 }

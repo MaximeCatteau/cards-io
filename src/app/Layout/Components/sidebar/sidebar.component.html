@@ -238,6 +238,11 @@
                           <span class="vsm-title">Administrateur</span>
                         </a>
                       </div>
+                      <div class="vsm-item" *ngIf="player?.role === 'ADMIN'">
+                        <a routerLink="/rpbinouze/matchdeck" routerLinkActive="active-item" class="vsm-link">
+                          <span class="vsm-title">Match Deck</span>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </ng-template>

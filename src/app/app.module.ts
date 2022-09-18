@@ -114,6 +114,7 @@ import { FootballPlayerComponent } from './DemoPages/RPBinouze/FootballPlayer/fo
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { PlayMatchComponent } from './DemoPages/RPBinouze/PlayMatch/play-match.component';
+import { MatchDeckComponent } from './DemoPages/RPBinouze/MatchDeck/match-deck.component';
 registerLocaleData(localeFr);
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -225,7 +226,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RPPlayerCardComponent,
     RpAdminComponent,
     FootballPlayerComponent,
-    PlayMatchComponent
+    PlayMatchComponent,
+    MatchDeckComponent
   ],
   imports: [
     BrowserModule,

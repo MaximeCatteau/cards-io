@@ -1,0 +1,196 @@
+<div class="row">
+    <div class="col-12">
+      <div class="card main-card mb-3">
+        <div class="card-header">
+          But pour le FC Binouze
+        </div>
+        <div class="card-body">
+            <form [formGroup]="scoreFCBinouzeForm" (ngSubmit)="sendGoalFCBinouze()">
+                Buteur :
+                <select class="form-control" formControlName="scorer">
+                    <option *ngFor="let p of players;" value="{{p.id}}">{{ p.firstname }} {{ p.lastname }}</option>
+                </select>
+                Passeur :
+                <select class="form-control" formControlName="passer">
+                    <option *ngFor="let p of players;" value="{{p.id}}">{{ p.firstname }} {{ p.lastname }}</option>
+                </select>
+                Minute : 
+                <input class="form-control" formControlName="minute" type="number">
+                <button type="submit" class="form-control btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+      <div class="card main-card mb-3">
+        <div class="card-header">
+          But pour l'équipe adverse
+        </div>
+        <div class="card-body">
+            <form [formGroup]="scoreOpponentForm" (ngSubmit)="sendGoalOpponent()">
+                Club :
+                <select class="form-control" formControlName="opponentId">
+                    <option *ngFor="let c of clubs;" value="{{c.id}}">{{ c.name }}</option>
+                </select>
+                Buteur :
+                <input type="text" class="form-control" formControlName="scorer">
+                Passeur :
+                <input type="text" class="form-control" formControlName="passer">
+                Minute : 
+                <input class="form-control" formControlName="minute" type="number">
+                <button type="submit" class="form-control btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+      <div class="card main-card mb-3">
+        <div class="card-header">
+          Début du match
+        </div>
+        <div class="card-body">
+            <form [formGroup]="matchBeginningForm" (ngSubmit)="sendMatchBeginning()">
+                Domicile :
+                <select class="form-control" formControlName="homeId">
+                    <option *ngFor="let c of clubs;" value="{{c.id}}">{{ c.name }}</option>
+                </select>
+                Extérieur :
+                <select class="form-control" formControlName="awayId">
+                    <option *ngFor="let c of clubs;" value="{{c.id}}">{{ c.name }}</option>
+                </select>
+                Compétition :
+                <select class="form-control" formControlName="competitionId">
+                    <option *ngFor="let c of competitions;" value="{{c.id}}">{{ c.name }}</option>
+                </select>
+                Stade :
+                <input type="text" class="form-control" formControlName="stadium">
+                <button type="submit" class="form-control btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+      <div class="card main-card mb-3">
+        <div class="card-header">
+          Fin du match
+        </div>
+        <div class="card-body">
+          <form [formGroup]="matchEndingForm" (ngSubmit)="sendMatchEnding()">
+            Domicile :
+            <select class="form-control" formControlName="homeId">
+                <option *ngFor="let c of clubs;" value="{{c.id}}">{{ c.name }}</option>
+            </select>
+            Score domicile :
+            <input class="form-control" formControlName="scoreHome" type="number">
+            Extérieur :
+            <select class="form-control" formControlName="awayId">
+                <option *ngFor="let c of clubs;" value="{{c.id}}">{{ c.name }}</option>
+            </select>
+            Score extérieur :
+            <input class="form-control" formControlName="scoreAway" type="number">
+            Compétition :
+            <select class="form-control" formControlName="competitionId">
+                <option *ngFor="let c of competitions;" value="{{c.id}}">{{ c.name }}</option>
+            </select>
+            <button type="submit" class="form-control btn btn-primary">Envoyer</button>
+        </form>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+      <div class="card main-card mb-3">
+        <div class="card-header">
+          Carton jaune FC Binouze
+        </div>
+        <div class="card-body">
+          <form [formGroup]="yellowCardBinouzeForm" (ngSubmit)="sendYellowCardBinouze()">
+            Joueur :
+            <select class="form-control" formControlName="player">
+                <option *ngFor="let p of players;" value="{{p.id}}">{{ p.firstname }} {{ p.lastname }}</option>
+            </select>
+            Minute : 
+            <input class="form-control" formControlName="minute" type="number">
+            <button type="submit" class="form-control btn btn-primary">Envoyer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+      <div class="card main-card mb-3">
+        <div class="card-header">
+          Carton jaune équipe adverse
+        </div>
+        <div class="card-body">
+          <form [formGroup]="yellowCardOpponentForm" (ngSubmit)="sendYellowCardOpponent()">
+            Adversaire :
+            <select class="form-control" formControlName="opponent">
+                <option *ngFor="let c of clubs;" value="{{c.id}}">{{ c.name }}</option>
+            </select>
+            Joueur :
+            <input type="text" class="form-control" formControlName="player">
+            Minute : 
+            <input class="form-control" formControlName="minute" type="number">
+            <button type="submit" class="form-control btn btn-primary">Envoyer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+      <div class="card main-card mb-3">
+        <div class="card-header">
+          Remplacement FC Binouze
+        </div>
+        <div class="card-body">
+          <form [formGroup]="subBinouzeForm" (ngSubmit)="sendSubFCBinouze()">
+            Joueur sortant :
+            <select class="form-control" formControlName="playerOut">
+                <option *ngFor="let p of players;" value="{{p.id}}">{{ p.firstname }} {{ p.lastname }}</option>
+            </select>
+            Joueur entrant :
+            <select class="form-control" formControlName="playerIn">
+                <option *ngFor="let p of players;" value="{{p.id}}">{{ p.firstname }} {{ p.lastname }}</option>
+            </select>
+            Minute : 
+            <input class="form-control" formControlName="minute" type="number">
+            <button type="submit" class="form-control btn btn-primary">Envoyer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+      <div class="card main-card mb-3">
+        <div class="card-header">
+          Remplacement équipe adverse
+        </div>
+        <div class="card-body">
+          <form [formGroup]="subOpponentForm" (ngSubmit)="sendSubOpponent()">
+            Adversaire :
+            <select class="form-control" formControlName="club">
+              <option *ngFor="let c of clubs;" value="{{c.id}}">{{ c.name }}</option>
+            </select>
+            Joueur sortant :
+            <input type="text" class="form-control" formControlName="playerOut">
+            Joueur entrant :
+            <input type="text" class="form-control" formControlName="playerIn">
+            Minute : 
+            <input class="form-control" formControlName="minute" type="number">
+            <button type="submit" class="form-control btn btn-primary">Envoyer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
